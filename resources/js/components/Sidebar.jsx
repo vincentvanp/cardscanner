@@ -51,7 +51,7 @@ class Sidebar extends React.Component{
                             <div className="user">
                                 <div className="avatar">
                                     {name[0].charAt(0).toUpperCase()}
-                                    {name[1].charAt(0).toUpperCase()}
+                                    {/* {name[1].charAt(0).toUpperCase()} */}
                                 </div>
                                 <div className="text--user">
                                     <p className="text--teacher-name">{user.name}</p>

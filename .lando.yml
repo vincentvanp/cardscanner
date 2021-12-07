@@ -1,0 +1,21 @@
+name: studentkaart-scanner-nfc
+recipe: laravel
+config:
+  php: '8.0'
+  composer_version: 2-latest
+  via: apache
+  ssl: true
+  webroot: public
+  database: mysql
+  cache: none
+  xdebug: true
+services:
+  pma:
+    type: phpmyadmin
+    hosts:
+      - database
+  node:
+    type: node
+proxy:
+   pma:
+    - pma.lndo.site

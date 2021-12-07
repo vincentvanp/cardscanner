@@ -11,7 +11,7 @@ class PreviousLessons extends React.Component {
     }
 
     async GetData(){
-        let data = await axios.post('/get-lessons')
+        let data = await axios.post('/previous-lessons')
         .then(function(response){
             return response.data;
         }).catch(e => console.log(e));

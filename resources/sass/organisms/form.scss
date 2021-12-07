@@ -1,0 +1,18 @@
+.ant-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 30vh;
+    align-items: center;
+}
+
+label{
+    color: white !important;
+    font-size: 20px !important;
+}
+
+.ant-row{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-self: center !important;
+}

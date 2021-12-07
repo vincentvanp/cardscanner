@@ -1,0 +1,75 @@
+.container--logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15%;
+    margin: 0 0 50px 0;
+}
+
+.container--main{
+    height: 100vh;
+}
+
+.container--card{
+    width: 100%;
+}
+
+.container--content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+}
+
+.container--header{
+    margin: 0;
+    background: white !important;
+    height: 80px !important;
+}
+
+.container--verified{
+    display: flex;
+}
+
+.container--page{
+    background-color: white;
+    width: 85%;
+    height: 70vh;
+    position: relative;
+}
+
+.container--text-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+}
+
+.container--login-button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 35%;
+    height: 30%;
+    border-radius: 26px;
+}
+
+.container--login-kdg-logo{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.container--user-table{
+    padding: 1%;
+    width: 95%;
+    height: 100%;
+}
+
+.container--active-table{
+    height: 90%;
+    background: white;
+    position: relative;
+}

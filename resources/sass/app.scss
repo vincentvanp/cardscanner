@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+@font-face {
+    font-family: "KDG";
+    src: url(../fonts/KdG-Regular.woff);
+}
+
+@import "atoms/text";
+@import "atoms/buttons";
+@import "atoms/links";
+@import "atoms/images";
+@import "molecules/card";
+@import "molecules/select";
+@import "organisms/containers";
+@import "organisms/form";
+@import "organisms/modal";
+@import "organisms/sidebar";
+@import "pages/home";
+@import "pages/ant";
+@import "pages/pages.scss";

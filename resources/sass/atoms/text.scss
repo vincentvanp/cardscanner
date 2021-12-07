@@ -1,0 +1,68 @@
+.title--card{
+    width: 50%;
+    display: flex;
+    justify-content: start;
+}
+
+.text--user{
+    margin: 0 0 0 30px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card--text{
+    font-family: "Montserrat";
+    font-size: 18px;
+    margin: 0;
+}
+
+.text--label{
+    color: #797474;
+}
+
+.card--text-atended{
+    color: #B2AFAF;
+    font-size: 16px;
+}
+
+.card--text-percentage{
+    color: #228002;
+    font-size: 16px;
+}
+
+.text--lesson-time{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #B2AFAF;
+}
+
+.text--header-title{
+    font-family: KDG;
+    font-size: 40px;
+    margin: 10px 0 0 0;
+}
+
+.text--header-verefied{
+    color: #ADABAB;
+    font-family: "Montserrat";
+    font-size: 20px;
+    margin: 0;
+}
+
+.text--page-title{
+    font-family: "Montserrat";
+    font-size: 30px;
+}
+
+.title--login{
+    font-family: KDG;
+    font-size: 40px;
+}
+
+.text--teacher-name{
+    font-family: "Montserrat";
+    font-size: 20px;
+    padding: 10px 0 0 0;
+}

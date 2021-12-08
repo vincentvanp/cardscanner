@@ -1,6 +1,7 @@
-import { BackTop, Button } from 'antd';
+import { Modal, Button } from 'antd';
 import React from 'react';
 import UserTable from '../components/ActiveLesson/UserTable'
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 window.Pusher = require('pusher-js');
 
@@ -19,6 +20,21 @@ channel.bind(sessionStorage.getItem("scanner"), function (data) {
 });
 
 class ActiveLessonView extends React.Component {
+
+    state = { visible: false };
+
+    showModal = () => {
+      this.setState({
+        visible: true,
+      });
+    };
+  
+    hideModal = () => {
+      this.setState({
+        visible: false,
+      });
+    };
+
     state = {
         lesson: {
             channel: 'backToFront',
@@ -42,6 +58,13 @@ class ActiveLessonView extends React.Component {
                         }});
     }
 
+    handleStopLesson = () => {
+
+        sessionStorage.setItem("scanner", "");
+        sessionStorage.setItem("coursename", "");
+    
+        window.location.href = "/lessons";
+    }
 
     componentDidMount(){
         this.GetUserData();
@@ -49,14 +72,6 @@ class ActiveLessonView extends React.Component {
 
     handleAddStudent = () => {
 
-    }
-
-    handleStopLesson = () => {
-
-        sessionStorage.setItem("scanner", "");
-        sessionStorage.setItem("coursename", "");
-
-        window.location.href = "/lessons";
     }
 
     render() {
@@ -80,8 +95,20 @@ class ActiveLessonView extends React.Component {
                         <div className="container--active-table">
                             <UserTable lesson={lesson.name} event={lesson.event} channel={lesson.channel} />
                             <Button className="button--add-student">Studenten toevoegen</Button>
-                            <Button className="button--stop-lesson" onClick={this.handleStopLesson}>Stop less</Button>
+                            <Button className="button--stop-lesson" onClick={this.showModal}>Stop les</Button>
                         </div>
+                        <Modal
+                            visible={this.state.visible}
+                            footer={[]}
+                            onCancel={this.hideModal}
+                            className="modal--stop-lesson"
+                        >
+                            <h2>Wilt u de les stoppen?</h2>
+                            <div className="container--modal-buttons">
+                                <Button className="button--confirm" onClick={this.handleStopLesson}>ja</Button>
+                                <Button className="button--cancel" onClick={this.hideModal}>Annuleren</Button>
+                            </div>
+                        </Modal>
                     </div>
                 </React.Fragment>
             )

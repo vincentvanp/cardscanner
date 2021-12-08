@@ -14,7 +14,7 @@ var scanners = [];
 function GetFormData() {
     axios.post('/get-lessons')
     .then(function (response) {
-        lessons = response.data;
+        lessons = response.data.lessons;
     })
     .catch(function (error) {
         console.log(error.response.data['message']);
@@ -22,7 +22,7 @@ function GetFormData() {
 
     axios.post('/get-scanners')
     .then(function (response) {
-        scanners = response.data;
+        scanners = response.data.scanners;
     })
     .catch(function (error) {
         console.log(error.response.data['message']);
@@ -78,7 +78,7 @@ function ContentForm() {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
-
+    
     return (
         <div className="form--button">
             <Button className="button--form" type="primary" onClick={showModal}><ClockCircleOutlined />start les</Button>

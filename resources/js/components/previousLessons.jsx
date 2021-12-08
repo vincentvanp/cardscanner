@@ -25,21 +25,26 @@ class PreviousLessons extends React.Component {
 
     render(){
 
-        const {lessons} = this.state;
+        const {lessons, user} = this.state.lessons;
 
-        return(
-            <div className="container--card">
-                <Space wrap>
-                    {lessons &&
-                    lessons.map(lesson => {
-                        return (
-                            <LessonCard lesson={lesson}/>
-                        );
-                    })}
-                </Space>
-                
-            </div>
-        );
+        
+        if(lessons != undefined){
+            return(
+                <div className="container--card">
+                    <Space wrap>
+                        {JSON.parse(lessons) && 
+                        JSON.parse(lessons).map(lesson => {
+                            return (
+                                <LessonCard key={lesson.id} lesson={lesson} user={user}/>
+                            );
+                        })}
+                    </Space>
+                    
+                </div>
+            );
+        }else{
+            return <h1>loading...</h1>
+        }
     }
 }
 

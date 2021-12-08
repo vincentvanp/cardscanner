@@ -8,7 +8,7 @@ use Auth;
 
 class UserController extends Controller
 {
-    //Stores a techer by recieving a coursename needs to be fixed to id?
+    //Stores a teacher by recieving a coursename needs to be fixed to id?
     public function storeTeacher(/*Request $request*/)
     {
         //$lesson = Lesson::where("id", $request["lesson_id"])->first();
@@ -21,5 +21,9 @@ class UserController extends Controller
             'lesson_id' => $lesson->id,
             'user_id' => Auth::user()->id,
         ));
+    }
+
+    public function GetUserData(){
+        return Auth::user();
     }
 }

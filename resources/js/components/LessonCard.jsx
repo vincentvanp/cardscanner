@@ -10,7 +10,7 @@ function PreviousLessonCard (props){
     var totalStudents = 24;
 
     return(
-        <Card key={props.lesson.name} className="card">
+        <Card className="card">
             <div className="card--text">
                 <h3>{props.lesson.name}</h3>
                 <p className="card--text text--label">aanwezigheden:</p>

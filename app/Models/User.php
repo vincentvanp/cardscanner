@@ -42,7 +42,20 @@ class User extends Authenticatable
     protected $casts = [
     ];
 
+    protected $visible = [
+        'id',
+        'name'
+    ];
+
     public function lessons(){
-        return $this->belongsToMany(Lesson::class, 'user_has_lesson', 'user_id')->withTimeStamps();
+        return $this->belongsToMany(Lesson::class, 'user_has_lesson', 'user_id')->withPivot('is_previous')->withTimeStamps();
+    }
+
+    public function previousLessons(){
+        return $this->belongsToMany(Lesson::class, 'user_has_lesson', 'user_id')->wherePivot('is_previous', 1)->withTimeStamps();
+    }
+
+    public function unstartedLessons(){
+        return $this->belongsToMany(Lesson::class, 'user_has_lesson', 'user_id')->wherePivot('is_previous', 0)->withTimeStamps();
     }
 }

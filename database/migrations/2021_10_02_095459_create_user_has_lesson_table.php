@@ -17,6 +17,7 @@ class CreateUserHasLessonTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('lesson_id')->constrained();
+            $table->boolean('is_previous')->default('0');
             $table->timestamps();
         });
     }

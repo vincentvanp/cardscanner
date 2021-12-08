@@ -12,7 +12,7 @@ use Carbon\Carbon;
 class ScannerController extends Controller
 {
     //Function to store a scanned student from pusher in the database
-    public function storeStudent(Request $request) //id gebruiken ipv name van les
+    public function storeStudent(Request $request)
     {
         $student = Student::where('serial_number', $request["serial"])->first();
         $lesson = Lesson::where('id', $request["lesson_id"])->first();
@@ -32,7 +32,14 @@ class ScannerController extends Controller
 
         event(new populateUserTable($student->name, $request["serial"], $date));
 
-        return [$student->name, $request["serial"], $time];
+        //return [$student->name, $request["serial"], $time];
+
+        return json_encode(array( //testen
+            'name' => $student->name,
+            'serial' => $request["serial"],
+            'time' => $time,
+        ));
+
     }
 
     public function getScanners(){

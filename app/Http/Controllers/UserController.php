@@ -9,17 +9,17 @@ use Auth;
 class UserController extends Controller
 {
     //Stores a techer by recieving a coursename needs to be fixed to id?
-    public function storeTeacher(Request $request)
+    public function storeTeacher(/*Request $request*/)
     {
-        $lesson = Lesson::where("id", $request["lesson_id"])->first();
+        //$lesson = Lesson::where("id", $request["lesson_id"])->first();
+        $lesson = Lesson::where("id", 4)->first();
         $user = Auth::user();
 
         $user->lessons()->attach($lesson);
 
-        return [$lesson->id, Auth::user()->id]; //Naar Json fixen?
-    }
-
-    public function GetUserData(){
-        return Auth::user();
+        return json_encode(array(
+            'lesson_id' => $lesson->id,
+            'user_id' => Auth::user()->id,
+        ));
     }
 }

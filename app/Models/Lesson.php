@@ -11,15 +11,22 @@ class Lesson extends Model
     
     protected $fillable = [
         'name',
-        'start_time',
-        'end_time'
+        'start',
+        'end'
     ];
 
-    protected $visible = ['name'];
+    protected $casts = [
+        'start' => 'date:Y-m-d'
+    ];
 
+    protected $visible = [
+        'id',
+        'name',
+        'start'
+    ];
     
     public function users(){
-        return $this->belongsToMany(User::class, 'user_has_lesson', 'lesson_id')->withTimeStamps();
+        return $this->belongsToMany(User::class, 'user_has_lesson', 'lesson_id')->withPivot('is_previous')->withTimeStamps();
     }
     
 
@@ -39,4 +46,6 @@ class Lesson extends Model
     {
         return $this->belongsTo(Course::class, 'course_id');
     }
+
+    
 }

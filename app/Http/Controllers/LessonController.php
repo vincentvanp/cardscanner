@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lesson;
+use App\Models\User;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
@@ -10,16 +11,27 @@ use Illuminate\Http\Request;
 
 class LessonController extends Controller
 {
-    //test
-    public function getLessons(){
-        return Lesson::all();
-    }
-
-    //Function to return all the previous lessons of the logged in user
-    public function getPreviousLessons() 
+    //Function to return all the previous lessons of the logged in user 
+    public function getPreviousLessons()
     {
         $user = Auth::user();
-        $lessons = $user->lessons;
-        return $lessons->toJson(); //volledige tabel returnen
+        $lessons = $user->previousLessons;
+
+        return json_encode(array(
+            'lessons' => $lessons->toJson(),
+            'user' => $user->makeHidden('name')->toJson(),
+        ));
+    }
+
+    //Function to return all the unstarted lessons of the logged in user 
+    public function getUnstartedLessons()
+    {
+        $user = Auth::user();
+        $lessons = $user->unstartedLessons;
+
+        return json_encode(array(
+            'lessons' => $lessons->toJson(),
+            'user' => $user->makeHidden('name')->toJson(),
+        ));
     }
 }

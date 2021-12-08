@@ -8,6 +8,7 @@ use App\Http\Controllers\StartCourseForm;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ApiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +27,9 @@ Route::get('oauth/callback/{provider}', [oAuthController::class, 'handleProvider
 
 Route::view('/login-admin', 'login')->where('login', '.*');
 
-Route::view('/{any}', 'dashboard')->where('any', '.*');
+Route::get('testing', [UserController::class, 'storeTeacher']);
+
+//Route::view('/{any}', 'dashboard')->where('any', '.*');
 
 Route::group(['middleware' => ['auth']], function () {
     //only authorized users can access these routes
@@ -44,7 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('get-absent-students', [StudentController::class, 'getAbsentStudents']);
     Route::post('get-student', [StudentController::class, 'getAbsentStudents']);
     //Route::get('absentStudents/{lesson_id}', [lessonController::class, 'getAbsentStudents']);
-
+    Route::post('get-loggedin-user', [ApiController::class, 'getUserData']);
     Route::post('student-has-lesson', [ScannerController::class, 'storeStudent']);
     Route::post('previous-courses', [LessonController::class, 'getDataLoggedInUser']);
 });

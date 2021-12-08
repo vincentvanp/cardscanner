@@ -14,7 +14,7 @@ var scanners = [];
 function GetFormData() {
     axios.post('/get-lessons')
     .then(function (response) {
-        lessons = response.data.lessons;
+        lessons = JSON.parse(response.data.lessons);
     })
     .catch(function (error) {
         console.log(error.response.data['message']);
@@ -22,7 +22,7 @@ function GetFormData() {
 
     axios.post('/get-scanners')
     .then(function (response) {
-        scanners = response.data.scanners;
+        scanners = response.data;
     })
     .catch(function (error) {
         console.log(error.response.data['message']);

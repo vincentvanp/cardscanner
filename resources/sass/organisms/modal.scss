@@ -13,6 +13,13 @@
 
 }
 
+.ant-modal-body{
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
 .ant-modal-title{
     color: #fff !important;
     font-family: KDG;

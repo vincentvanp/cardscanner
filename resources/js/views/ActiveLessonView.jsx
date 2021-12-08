@@ -1,4 +1,4 @@
-import { Modal, Button } from 'antd';
+import { Input, Modal, Button } from 'antd';
 import React from 'react';
 import UserTable from '../components/ActiveLesson/UserTable'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
@@ -21,7 +21,19 @@ channel.bind(sessionStorage.getItem("scanner"), function (data) {
 
 class ActiveLessonView extends React.Component {
 
-    state = { visible: false };
+    state = { visible: false , addVisible: false};
+
+    showAddModal = () => {
+        this.setState({
+            addVisible: true,
+        });
+    };
+
+    hideAddModal = () => {
+        this.setState({
+            addVisible: false,
+        });
+    };
 
     showModal = () => {
       this.setState({
@@ -94,7 +106,7 @@ class ActiveLessonView extends React.Component {
                         <h1 className="text--page-title">Dasboard</h1>
                         <div className="container--active-table">
                             <UserTable lesson={lesson.name} event={lesson.event} channel={lesson.channel} />
-                            <Button className="button--add-student">Studenten toevoegen</Button>
+                            <Button className="button--add-student" onClick={this.showAddModal}>Studenten toevoegen</Button>
                             <Button className="button--stop-lesson" onClick={this.showModal}>Stop les</Button>
                         </div>
                         <Modal
@@ -107,6 +119,18 @@ class ActiveLessonView extends React.Component {
                             <div className="container--modal-buttons">
                                 <Button className="button--confirm" onClick={this.handleStopLesson}>ja</Button>
                                 <Button className="button--cancel" onClick={this.hideModal}>Annuleren</Button>
+                            </div>
+                        </Modal>
+                        <Modal
+                            visible={this.state.addVisible}
+                            title="student toevoegen"
+                            footer={[]}
+                            onCancel={this.hideAddModal}
+                            className="modal--stop-lesson"
+                        >
+                            <Input className="input--name" placeholder="naam" />
+                            <div className="container--modal-buttons">
+                                <Button className="button--confirm" onClick={this.hideAddModal}>toevoegen</Button>
                             </div>
                         </Modal>
                     </div>

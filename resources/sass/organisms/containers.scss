@@ -73,3 +73,10 @@
     background: white;
     position: relative;
 }
+
+.container--modal-buttons{
+    display: flex;
+    height: 150px;
+    justify-content: space-around;
+    align-items: center;
+}

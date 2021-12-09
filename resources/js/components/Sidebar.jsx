@@ -3,8 +3,8 @@ import {
     Link
 } from 'react-router-dom';
 
-import { Button, Avatar, Typography, Layout, Menu } from 'antd';
-import { UserOutlined, HomeFilled, LaptopOutlined } from '@ant-design/icons';
+import { Button, Layout, Menu } from 'antd';
+import { HomeFilled, LaptopOutlined } from '@ant-design/icons';
 
 const { Sider } = Layout;
 

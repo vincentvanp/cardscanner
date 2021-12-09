@@ -1,8 +1,8 @@
 import React from 'react';
 
-import LessonModal from './previousLessons/LessonsModal';
+import { Link } from 'react-router-dom';
 
-import { Card } from 'antd';
+import { Card, Button } from 'antd';
 
 function PreviousLessonCard (props){
     
@@ -19,7 +19,9 @@ function PreviousLessonCard (props){
             </div>
             <p className="text--lesson-time">{props.lesson.name}</p>
             <div className="button-container--card">
-                <LessonModal title={props.lesson.name} peopleAtended={studentsPresent} totalStudents={totalStudents}/>
+                <Button className="button--add-student" onClick={() => {
+                    window.location.href = "previous-lessons/" + props.lesson.id;
+                }}>Meer info</Button>
             </div>
         </Card>
     );

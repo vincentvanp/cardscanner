@@ -10,8 +10,10 @@ class UserController extends Controller
 {
     public function startLesson(Request $request)
     {
-        $lesson = Lesson::where('id', $request["lesson_id"])->first();
-        $user = Auth::user();
-        return $lesson->users()->updateExistingPivot($user,['is_previous' => 1]);
+        return $request;
+        
+        // $lesson = Lesson::where('id', $request["lesson_id"])->first();
+        // $user = Auth::user();
+        // return $lesson->users()->updateExistingPivot($user,['is_previous' => 1]);
     }
 }

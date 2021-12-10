@@ -52,12 +52,17 @@ class ContentForm extends React.Component{
 
     onFinish = (values) => {
 
-        axios.post('/user-has-lesson', { course_id: values['lesson_id'] });
+        const lesson_id = values["lesson_id"];
+
+        axios.post('/user-has-lesson', {lesson_id})
+        .catch(function (error) {
+            console.log(error.data);
+        });
 
         sessionStorage.setItem("lesson_id", values['lesson_id']);
         sessionStorage.setItem("scanner", values['scanner']);
     
-        window.location.href = "/active-lesson";
+        //window.location.href = "/active-lesson";
     };
 
     onFinishFailed = (errorInfo) => {

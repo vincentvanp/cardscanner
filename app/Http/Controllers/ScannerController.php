@@ -11,6 +11,11 @@ use Carbon\Carbon;
 
 class ScannerController extends Controller
 {
+    //Returns all scanners to frontend
+    public function getScanners(){
+        return Scanner::all()->toJson();
+    }
+
     //Function to store a scanned student from pusher in the database
     public function storeStudent(Request $request)
     {
@@ -32,17 +37,10 @@ class ScannerController extends Controller
 
         event(new populateUserTable($student->name, $request["serial"], $date));
 
-        //return [$student->name, $request["serial"], $time];
-
-        return json_encode(array( //testen
+        return json_encode(array(
             'name' => $student->name,
             'serial' => $request["serial"],
             'time' => $time,
         ));
-
-    }
-
-    public function getScanners(){  //naar json fiksen
-        return Scanner::all();
     }
 }

@@ -18,7 +18,7 @@ class CourseController extends Controller
                         ->leftJoin('user_has_lesson', 'users.id', '=', 'user_has_lesson.user_id')
                         ->leftJoin('lessons', 'lessons.id','=','user_has_lesson.lesson_id')
                         ->leftJoin('courses','courses.id','=','lessons.course_id')
-                        ->select('courses.name')
+                        ->select('courses.id', 'courses.name')
                         ->distinct()
                         ->get();
         

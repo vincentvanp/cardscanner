@@ -27,18 +27,12 @@ Route::get('oauth/callback/{provider}', [oAuthController::class, 'handleProvider
 
 Route::view('/login-admin', 'login')->where('login', '.*');
 
-Route::get('testing', [LessonController::class, 'getPreviousLessons']);
+Route::get('testing', [LessonController::class, 'getLessonsByCourse']);
 
 Route::view('/{any}', 'dashboard')->where('any', '.*');
 
 Route::group(['middleware' => ['auth']], function () {
     //only authorized users can access these routes
-
-
-    Route::get('students', [StudentController::class, 'index']);
-    Route::get('users', [UserController::class, 'index']);
-    Route::post('lessons', [LessonController::class, 'index']);
-    Route::post('scanners', [ScannerController::class, 'index']);
     Route::post('previous-lessons', [LessonController::class, 'getPreviousLessons']);
     Route::post('get-scanners', [ScannerController::class, 'getScanners']);
     Route::post('get-lessons', [LessonController::class, 'getUnstartedLessons']);

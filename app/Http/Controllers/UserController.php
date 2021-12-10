@@ -8,21 +8,10 @@ use Auth;
 
 class UserController extends Controller
 {
-    //Stores a teacher by recieving a coursename needs to be fixed to id?
-    /*public function storeTeacher(Request $request)
+    public function startLesson(Request $request)
     {
-        $lesson = Lesson::where("id", $request["lesson_id"])->first();
+        $lesson = Lesson::where('id', $request["lesson_id"])->first();
         $user = Auth::user();
-
-    //     $user->lessons()->attach($lesson);
-
-        return json_encode(array(
-            'lesson_id' => $lesson->id,
-            'user_id' => Auth::user()->id,
-        ));
-    }*/
-
-    /*public function GetUserData(){
-        return Auth::user();
-    }*/
+        return $lesson->users()->updateExistingPivot($user,['is_previous' => 1]);
+    }
 }

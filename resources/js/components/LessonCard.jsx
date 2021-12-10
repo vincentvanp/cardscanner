@@ -17,7 +17,7 @@ function PreviousLessonCard (props){
                 <p className="card--text card--text-atended">{studentsPresent}/{totalStudents} leerlingen</p>
                 <p className="card--text card--text-percentage">{Math.round(studentsPresent/totalStudents*100)}% was aanwezig</p>
             </div>
-            <p className="text--lesson-time">{props.lesson.name}</p>
+            <p className="text--lesson-time">{props.lesson.start}</p>
             <div className="button-container--card">
                 <Button className="button--add-student" onClick={() => {
                     window.location.href = "previous-lessons/" + props.lesson.id;

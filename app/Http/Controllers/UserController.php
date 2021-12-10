@@ -14,7 +14,7 @@ class UserController extends Controller
         $lesson = Lesson::where("id", $request["lesson_id"])->first();
         $user = Auth::user();
 
-        $user->lessons()->attach($lesson);
+    //     $user->lessons()->attach($lesson);
 
         return json_encode(array(
             'lesson_id' => $lesson->id,

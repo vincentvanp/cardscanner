@@ -11,12 +11,9 @@ class PreviousLessons extends React.Component {
     }
 
     async GetData(){
-        let data = await axios.post('/previous-lessons')
-        .then(function(response){
-            return response.data;
-        }).catch(e => console.log(e));
-        
-        this.setState({ lessons: data});
+        const {data} = await axios.post('/previous-lessons');
+
+        this.setState({ lessons: data });
     }
 
     componentDidMount(){

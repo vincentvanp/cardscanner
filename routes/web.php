@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('previous-lessons', [LessonController::class, 'getPreviousLessons']);
     Route::post('get-scanners', [ScannerController::class, 'getScanners']);
     Route::post('get-lessons', [LessonController::class, 'getUnstartedLessons']);
+    Route::post('get-courses', [CourseController::class, 'getUserCourses']);
     Route::post('get-attending-students', [StudentController::class, 'getAttendingStudents']);
     Route::post('get-absent-students', [StudentController::class, 'getAbsentStudents']);
     Route::post('get-student', [StudentController::class, 'getAbsentStudents']);

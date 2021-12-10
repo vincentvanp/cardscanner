@@ -12,7 +12,7 @@ var lessons = [];
 var scanners = [];
 
 function GetFormData() {
-    axios.post('/get-lessons')
+    axios.post('/get-courses')
     .then(function (response) {
         lessons = JSON.parse(response.data.lessons);
     })

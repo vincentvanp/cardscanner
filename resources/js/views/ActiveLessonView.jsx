@@ -1,7 +1,6 @@
 import { Input, Modal, Button } from 'antd';
 import React from 'react';
 import UserTable from '../components/ActiveLesson/UserTable'
-import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 window.Pusher = require('pusher-js');
 

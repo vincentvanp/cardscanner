@@ -8,30 +8,36 @@ const { Option } = Select;
 
 const axios = require('axios').default;
 
-var lessons = [];
-var scanners = [];
 
-function GetFormData() {
-    axios.post('/get-courses')
-    .then(function (response) {
-        lessons = JSON.parse(response.data.lessons);
-    })
-    .catch(function (error) {
-        console.log(error.response.data['message']);
-    });
+class ContentForm extends React.Component{
+    state = {
+        visible: false,
+        courses: [],
+        scanners: [],
+        lessons: []
+    };
 
-    axios.post('/get-scanners')
-    .then(function (response) {
-        scanners = response.data;
-    })
-    .catch(function (error) {
-        console.log(error.response.data['message']);
-    });
-}
+    async GetFormData() {
+        const courses = await axios.post('/get-courses');
+    
+        const scanners = await axios.post('/get-scanners');
 
-function ContentForm() {
+        this.setState({ courses: courses.data, scanners: scanners.data });
+    }
 
-    const layout = {
+    async GetlessonData(value){
+        const lessons = await axios.post('/get-lesson-by-course', {course_id: value});
+
+        this.setState({ lessons: lessons.data });
+    }
+
+    componentDidMount(){
+        this.GetFormData();
+    }
+
+    formRef = React.createRef()
+
+    layout = {
         labelCol: {
             span: 8,
         },
@@ -40,92 +46,99 @@ function ContentForm() {
         },
     };
 
-    const [form] = Form.useForm();
+    onCourseChange = (value) => {
+        this.GetlessonData(value);
+    };
 
+    onFinish = (values) => {
 
-    const onFinish = (values) => {
+        axios.post('/user-has-lesson', { course_id: values['lesson_id'] });
 
-        axios.post('/user-has-lesson', {
-            coursename: values['coursename']
-        })
-        .then(function (response) {
-            console.log(response);
-        })
-        .catch(function (error) {
-            console.log(error.response.data['message']);
-        });
-
-        sessionStorage.setItem("coursename", values['coursename']);
+        sessionStorage.setItem("lesson_id", values['lesson_id']);
         sessionStorage.setItem("scanner", values['scanner']);
     
         window.location.href = "/active-lesson";
     };
 
-    const onFinishFailed = (errorInfo) => {
+    onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
-    const showModal = () => {
-        setIsModalVisible(true);
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
     };
 
-    const handleOk = () => {
-        setIsModalVisible(false);
-    };
-
-    const handleCancel = () => {
-        setIsModalVisible(false);
+    hideModal = () => {
+        this.setState({
+            visible: false,
+        });
     };
     
-    return (
-        <div className="form--button">
-            <Button className="button--form" type="primary" onClick={showModal}><ClockCircleOutlined />start les</Button>
-            <Modal
-                title="start les"
-                visible={isModalVisible}
-                onOk={handleOk}
-                onCancel={handleCancel}
-                width={1000}
-                footer={[
-                ]}>
-                <Form {...layout} form={form} onFinish={onFinish} name="control-hooks" className="Form--Start-les">
-                    <Form.Item name="coursename" label="coursename" rules={[{ required: true }]}>
-                        <Select
-                            className="select--lesson-form"
-                            placeholder="Selecteer een les"
-                            style={{ width: 200 }}
-                            allowClear>
-                            {lessons.map((lesson) => (
-                                <Option key={lesson.id} value={lesson.name}>{lesson.name}</Option>
-                            ))}
-                        </Select>
-                    </Form.Item>
+    render(){
 
-                    <Form.Item name="scanner" label="Scanner" rules={[{ required: true }]}>
-                        <Select
-                            className="select--lesson-form"
-                            placeholder="Selecteer een scanner"
-                            style={{ width: 200 }}
-                            allowClear>
+        const { visible, courses, scanners, lessons } = this.state;
 
-                            {scanners.map((scanner) => (
-                                <Option key={scanner.id} value={scanner.event}>{scanner.event}</Option>
-                            ))}
-                        </Select>
-                    </Form.Item>
-                    <Form.Item wrapperCol={{ span: 16 }}>
-                        <Button className="button--lesson-form" type="primary" htmlType="submit">
-                            start
-                        </Button>
-                    </Form.Item>
-                </Form>
-            </Modal>
-        </div>
-    );
+        return (
+            <div className="form--button">
+                <Button className="button--form" type="primary" onClick={this.showModal}><ClockCircleOutlined />start les</Button>
+                <Modal
+                    title="start les"
+                    visible={visible}
+                    onOk={this.hideModal}
+                    onCancel={this.hideModal}
+                    width={1000}
+                    footer={[
+                    ]}>
+                    <Form {...this.layout} form={this.form} onFinish={this.onFinish} name="control-hooks" className="Form--Start-les">
+                        <Form.Item name="course_id" label="course_id" rules={[{ required: true }]}>
+                            <Select
+                                className="select--lesson-form"
+                                placeholder="Selecteer een les"
+                                style={{ width: 200 }}
+                                onChange={this.onCourseChange}
+                                allowClear>
+                                {courses.map((course) => (
+                                    <Option key={course.id} value={course.id}>{course.name}</Option>
+                                ))}
+                            </Select>
+                        </Form.Item>
+
+                        <Form.Item name="lesson_id" label="lesson_id" rules={[{ required: true }]}>
+                            <Select
+                                className="select--lesson-form"
+                                placeholder="Selecteer een les"
+                                style={{ width: 200 }}
+                                allowClear>
+                                {lessons.map((lesson) => (
+                                    <Option key={lesson.id} value={lesson.id}>{lesson.name}</Option>
+                                ))}
+                            </Select>
+                        </Form.Item>
+
+                        <Form.Item name="scanner" label="Scanner" rules={[{ required: true }]}>
+                            <Select
+                                className="select--lesson-form"
+                                placeholder="Selecteer een scanner"
+                                style={{ width: 200 }}
+                                allowClear>
+
+                                {scanners.map((scanner) => (
+                                    <Option key={scanner.id} value={scanner.event}>{scanner.event}</Option>
+                                ))}
+                            </Select>
+                        </Form.Item>
+                        <Form.Item wrapperCol={{ span: 16 }}>
+                            <Button className="button--lesson-form" type="primary" htmlType="submit">
+                                start
+                            </Button>
+                        </Form.Item>
+                    </Form>
+                </Modal>
+            </div>
+        );
+    }
 }
-
-GetFormData()
 
 export default ContentForm;

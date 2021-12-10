@@ -19,6 +19,9 @@ class ScannerController extends Controller
     //Function to store a scanned student from pusher in the database
     public function storeStudent(Request $request)
     {
+
+        return $request;
+
         $student = Student::where('serial_number', $request["serial"])->first();
         $lesson = Lesson::where('id', $request["lesson_id"])->first();
 

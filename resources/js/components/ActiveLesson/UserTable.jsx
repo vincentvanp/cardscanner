@@ -36,7 +36,7 @@ class UserTable extends React.Component {
         },
         {
             title: 'Student Id',
-            dataIndex: 'id',
+            dataIndex: 'serial',
             key: 'studentId',
         },
         {

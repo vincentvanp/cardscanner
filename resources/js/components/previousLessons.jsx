@@ -12,7 +12,7 @@ class PreviousLessons extends React.Component {
 
     async GetData(){
         const {data} = await axios.post('/previous-lessons');
-
+            
         this.setState({ lessons: data });
     }
 
@@ -29,8 +29,8 @@ class PreviousLessons extends React.Component {
             return(
                 <div className="container--card">
                     <Space wrap>
-                        {JSON.parse(lessons) && 
-                        JSON.parse(lessons).map(lesson => {
+                        {lessons && 
+                        lessons.map(lesson => {
                             return (
                                 <LessonCard key={lesson.id} lesson={lesson} user={user}/>
                             );

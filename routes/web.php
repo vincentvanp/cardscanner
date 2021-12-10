@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('get-attending-students', [StudentController::class, 'getAttendingStudents']);
     Route::post('get-absent-students', [StudentController::class, 'getAbsentStudents']);
     Route::post('get-student', [StudentController::class, 'getAbsentStudents']);
+    Route::post('get-lesson-by-course', [LessonController::class, 'getLessonsByCourse']);
     //Route::get('absentStudents/{lesson_id}', [lessonController::class, 'getAbsentStudents']);
     Route::post('get-user-data', [ApiController::class, 'getUserData']);
     Route::post('student-has-lesson', [ScannerController::class, 'storeStudent']);

@@ -58,6 +58,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => bcrypt('admin'),
         ]);
+        User::create([
+            'name' => 'john',
+            'email' => 'john@gmail.com',
+            'password' => bcrypt('paswoord'),
+        ]);
 
         for ($i = 1; $i < 10; $i++) {
             $this->scannersSeeder('scanner-' . $i);

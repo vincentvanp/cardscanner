@@ -27,7 +27,7 @@ Route::get('oauth/callback/{provider}', [oAuthController::class, 'handleProvider
 
 Route::view('/login-admin', 'login')->where('login', '.*');
 
-//Route::get('testing', [UserController::class, 'storeTeacher']);
+Route::get('testing', [LessonController::class, 'getPreviousLessons']);
 
 Route::view('/{any}', 'dashboard')->where('any', '.*');
 

@@ -42,7 +42,7 @@ class ScannerController extends Controller
 
     }
 
-    public function getScanners(){
+    public function getScanners(){  //naar json fiksen
         return Scanner::all();
     }
 }

@@ -12,14 +12,14 @@ use Illuminate\Http\Request;
 class LessonController extends Controller
 {
     //Function to return all the previous lessons of the logged in user 
-    public function getPreviousLessons()
+    public function getPreviousLessons() 
     {
         $user = Auth::user();
         $lessons = $user->previousLessons;
 
         return json_encode(array(
-            'lessons' => $lessons->toJson(),
-            'user' => $user->makeHidden('name')->toJson(),
+            'lessons' => $lessons,
+            'user' => $user->makeHidden('name'),
         ));
     }
 
@@ -30,8 +30,8 @@ class LessonController extends Controller
         $lessons = $user->unstartedLessons;
 
         return json_encode(array(
-            'lessons' => $lessons->toJson(),
-            'user' => $user->makeHidden('name')->toJson(),
+            'lessons' => $lessons,
+            'user' => $user->makeHidden('name'),
         ));
     }
 }

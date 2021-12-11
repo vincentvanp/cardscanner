@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
 import { ClockCircleOutlined } from '@ant-design/icons';
+import { valuesIn } from 'lodash';
 
 const { Option } = Select;
 
@@ -31,6 +32,12 @@ class ContentForm extends React.Component{
         this.setState({ lessons: lessons.data });
     }
 
+    async UserHasLesson(value){
+
+        const data = await axios.post('/user-has-lesson');
+        console.log(data);
+    }
+
     componentDidMount(){
         this.GetFormData();
     }
@@ -52,12 +59,7 @@ class ContentForm extends React.Component{
 
     onFinish = (values) => {
 
-        const lesson_id = values["lesson_id"];
-
-        axios.post('/user-has-lesson', {lesson_id})
-        .catch(function (error) {
-            console.log(error.data);
-        });
+        this.UserHasLesson(values["lesson_id"]);
 
         sessionStorage.setItem("lesson_id", values['lesson_id']);
         sessionStorage.setItem("scanner", values['scanner']);

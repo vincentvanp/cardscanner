@@ -37,15 +37,10 @@ class LessonController extends Controller
     }
 
     //Function that gives back lessons based on a given course id
-    public function getUnstartedLessonsByCourse(Request $request){
-        $course = Course::where('id', $request['course_id'])->first();
-        return $course->lessons->toJson();
+    public function getUnstartedLessonsByCourse(/*Request $request*/){
+        $user = Auth::user();
+        return $user->unstartedLessons->where('course_id', $request['course_id'])->toJson();
     }
 
-    /*public function StartLesson(Request $request){
-
-        $lesson = Lesson::where('id', $request["lesson_id"])->first();
-        $user = Auth::user();
-        return $lesson->users()->updateExistingPivot($user,['is_previous' => 1]);
-    }*/
+    
 }

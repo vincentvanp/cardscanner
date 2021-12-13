@@ -63,7 +63,7 @@ class ContentForm extends React.Component{
         sessionStorage.setItem("lesson_id", values['lesson_id']);
         sessionStorage.setItem("scanner", values['scanner']);
     
-        //window.location.href = "/active-lesson";
+        window.location.href = "/active-lesson";
     };
 
     onFinishFailed = (errorInfo) => {

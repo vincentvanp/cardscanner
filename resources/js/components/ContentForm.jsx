@@ -34,7 +34,6 @@ class ContentForm extends React.Component{
 
     async UserHasLesson(value){
         const data = await axios.post('/user-has-lesson', {lesson_id: value});
-        console.log(data);
     }
 
     componentDidMount(){
@@ -101,7 +100,7 @@ class ContentForm extends React.Component{
                         <Form.Item name="course_id" label="course_id" rules={[{ required: true }]}>
                             <Select
                                 className="select--lesson-form"
-                                placeholder="Selecteer een les"
+                                placeholder="Selecteer een vak"
                                 style={{ width: 200 }}
                                 onChange={this.onCourseChange}
                                 allowClear>

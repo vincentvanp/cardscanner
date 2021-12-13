@@ -41,4 +41,11 @@ class LessonController extends Controller
         $course = Course::where('id', $request['course_id'])->first();
         return $course->lessons->toJson();
     }
+
+    public function StartLesson(Request $request){
+
+        $lesson = Lesson::where('id', $request["lesson_id"])->first();
+        $user = Auth::user();
+        return $lesson->users()->updateExistingPivot($user,['is_previous' => 1]);
+    }
 }

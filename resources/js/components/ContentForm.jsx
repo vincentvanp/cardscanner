@@ -33,8 +33,7 @@ class ContentForm extends React.Component{
     }
 
     async UserHasLesson(value){
-
-        const data = await axios.post('/user-has-lesson');
+        const data = await axios.post('/user-has-lesson', {lesson_id: value});
         console.log(data);
     }
 

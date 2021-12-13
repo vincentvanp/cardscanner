@@ -31,6 +31,7 @@ Route::view('/{any}', 'dashboard')->where('any', '.*');
 
 Route::group(['middleware' => ['auth']], function () {
     //only authorized users can access these routes
+    Route::post('user-has-lesson', [UserController::class, 'StartLesson']);
     Route::post('previous-lessons', [LessonController::class, 'getPreviousLessons']);
     Route::post('get-scanners', [ScannerController::class, 'getScanners']);
     Route::post('get-lessons', [LessonController::class, 'getUnstartedLessons']);
@@ -39,7 +40,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('get-absent-students', [StudentController::class, 'getAbsentStudents']);
     Route::post('get-student', [StudentController::class, 'getAbsentStudents']);
     Route::post('get-lesson-by-course', [LessonController::class, 'getLessonsByCourse']);
-    Route::post('user-has-lesson', [StudentController::class, 'UserHasLesson']);
     //Route::get('absentStudents/{lesson_id}', [lessonController::class, 'getAbsentStudents']);
     Route::post('get-user-data', [ApiController::class, 'getUserData']);
     Route::post('student-has-lesson', [ScannerController::class, 'storeStudent']);

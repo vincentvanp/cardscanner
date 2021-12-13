@@ -32,9 +32,10 @@ class PreviousLessonsView extends React.Component {
                     <h1 className="text--page-title">Vorige lessen</h1>
                     <div className="select--previous-lessons">
                         <h3>Filter op</h3>
-                        <Select defaultValue="none" style={{ width: 150 }} onChange={(value) => {
+                        <Select defaultValue="Geen filter" style={{ width: 150 }} onChange={(value) => {
                             this.setState({course: value})
                         }}>
+                            <Option key={0} value={0}>Geen filter</Option>
                         {courses && 
                         courses.map(course => {
                             return (

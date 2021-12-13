@@ -36,7 +36,7 @@ const MainRouter = () => {
                 <Route path="active-lesson" element={<LayoutView Component={<ActiveLessonView />} />} />
                 <Route path="dashboard" element={<LayoutView Component={<DashboardView />} />} />
                 <Route path="previous-lessons" element={<LayoutView Component={<PreviousLessonsView />} />} />
-                <Route path="previous-lessons/:lessonId" element={<PreviousLessonDetailView/>} />
+                <Route path="previous-lessons/:lessonId" element={<LayoutView Component={<PreviousLessonDetailView />} />} />
             </Route>
 
             <Route path='*' element={<Navigate replace to="/dashboard" />} />

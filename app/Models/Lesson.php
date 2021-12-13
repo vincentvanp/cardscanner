@@ -22,6 +22,7 @@ class Lesson extends Model
     protected $visible = [
         'id',
         'name',
+        'course_id',
         'start'
     ];
     

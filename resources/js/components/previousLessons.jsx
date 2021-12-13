@@ -25,7 +25,6 @@ class PreviousLessons extends React.Component {
 
         if(lessons != undefined){
             const course = this.props.course;
-            console.log(course);
 
             return(
                 <div className="container--card">

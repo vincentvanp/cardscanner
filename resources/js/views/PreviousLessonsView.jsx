@@ -1,35 +1,30 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Layout, Select } from 'antd';
 
 const { Option } = Select;
 
 import PreviousLessons from '../components/previousLessons';
 
-let course = 0;
-
 class PreviousLessonsView extends React.Component {
-
+    
     state = {
-        courses: []
+        courses: [],
+        course: 0
     }
-
+    
     async GetData(){
         const {data} = await axios.post('/get-courses');
-            
+        
         this.setState({ courses: data });
     }
-
+    
     componentDidMount(){
         this.GetData();
     }
-
-    handleChange(value) {
-        course = value;
-    }   
-
+    
     render() {
-
-        const {courses} = this.state;
+        
+        const {course, courses} = this.state;   
 
         return (
             <Layout className="container--content">
@@ -37,7 +32,9 @@ class PreviousLessonsView extends React.Component {
                     <h1 className="text--page-title">Vorige lessen</h1>
                     <div className="select--previous-lessons">
                         <h3>Filter op</h3>
-                        <Select defaultValue="none" style={{ width: 150 }} onChange={this.handleChange}>
+                        <Select defaultValue="none" style={{ width: 150 }} onChange={(value) => {
+                            this.setState({course: value})
+                        }}>
                         {courses && 
                         courses.map(course => {
                             return (

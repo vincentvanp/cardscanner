@@ -11,10 +11,8 @@ function PreviousLessonDetailView(){
                 <h1 className="text--page-title">Meer informatie</h1>
             </div>
             <div className="container--page">
-                <div className="container--user-table">
-                    <div className="container--active-table">
-                        <PreviousDetail lesson_id={useParams()}/>
-                    </div>
+                <div className="container--active-table">
+                    <PreviousDetail lesson_id={useParams()}/>
                 </div>
             </div>
         </Layout>

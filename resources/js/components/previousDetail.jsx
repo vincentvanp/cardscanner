@@ -46,13 +46,17 @@ class PreviousDetail extends React.Component{
     render(){
 
         const { absent_students, present_students} = this.state;
-        console.log(present_students);
 
         if(present_students != undefined){
             return(
                 <React.Fragment>
                     <div style={{ padding: '1%' }}>
-                        <Table dataSource={present_students} columns={this.columns} scroll={{ y: 500 }} pagination={false}/>
+                        <Table 
+                            dataSource={present_students} 
+                            columns={this.columns} 
+                            scroll={{ y: 500 }}
+                            showHeader={false}
+                            pagination={false}/>
                         <Button className="button--stop-lesson" onClick={this.ReturnToDashboard} type="primary">Terug</Button>
                     </div>
                 </React.Fragment>

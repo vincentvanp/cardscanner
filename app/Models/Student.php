@@ -14,7 +14,10 @@ class Student extends Model
         'serial_number',
     ];
 
-    protected $visible = ['name'];
+    protected $visible = [
+        'name',
+        'serial_number'
+    ];
 
     public function lessons(){
         return $this->belongsToMany(Lesson::class, 'student_has_lesson', 'student_id')->withPivot('present')->withTimeStamps();

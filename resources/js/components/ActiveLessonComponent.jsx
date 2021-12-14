@@ -67,7 +67,7 @@ class ActiveLesson extends React.Component {
             <React.Fragment>
                 <div style={{ padding: '1%' }}>
                     <UserTable lesson={this.state.lesson.name} event={this.state.lesson.event} channel={this.state.lesson.channel} />
-                    <Button type="primary" shape="round">Add Student</Button>
+                    <Button type="primary">Add Student</Button>
                     <Button onClick={this.handleStopLesson} type="danger">Stop Lesson</Button>
 
                 </div>

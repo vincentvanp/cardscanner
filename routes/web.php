@@ -29,7 +29,6 @@ Route::view('/login-admin', 'login')->where('login', '.*');
 
 Route::view('/{any}', 'dashboard')->where('any', '.*');
 
-
 Route::group(['middleware' => ['auth']], function () {
     //only authorized users can access these routes
     Route::post('user-has-lesson', [UserController::class, 'startLesson']);

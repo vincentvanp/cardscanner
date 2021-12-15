@@ -5,7 +5,8 @@ import Pusher from "pusher-js"
 class UserTable extends React.Component {
 
     state = {
-        studentData: []
+        studentData: [],
+        lessonData: []
     }
 
     pusherBind(channel, event) {
@@ -19,18 +20,23 @@ class UserTable extends React.Component {
         this.channel.bind(event, this.receiveUpdateFromPusher)
     }
 
+    async GetLessonData(){
+        const lesson = await axios.post("/get-attending-students", {lesson_id: this.props.lesson});
+
+        this.setState({lessonData: lesson.data});
+    }
+
     componentDidMount() {
 
         this.pusherBind(this.props.channel, this.props.event);
+        this.GetLessonData();
     }
 
     receiveUpdateFromPusher = data => {
 
-        console.log(data);
-
         // pusherData looks like this {"studentName": "Name", "studentId": 1234, "time": "12:30"}
-        // const studentData = [data, ...this.state.studentData];
-        // this.setState({ studentData });
+        const studentData = [data, ...this.state.studentData];
+        this.setState({ studentData });
     }
 
     columns = [
@@ -40,20 +46,29 @@ class UserTable extends React.Component {
             key: 'studentName',
         },
         {
-            title: 'Student Id',
-            dataIndex: 'serial',
-            key: 'studentId',
+            title: 'Time',
+            dataIndex: 'updated_at',
+            key: 'time',
         },
         {
-            title: 'Time',
-            dataIndex: 'time',
-            key: 'time',
-        }
+            title: 'Student Id',
+            dataIndex: 'serial_number',
+            key: 'studentId',
+        },
+
     ]
 
     render() {
 
         const datas = [...this.state.studentData];
+
+        const {lessonData} = this.state;
+
+        lessonData.map((data) => {
+            datas.push(data);
+        })
+
+        console.log(datas);
 
         datas.map((data, index) =>
             data.key = index
@@ -61,7 +76,7 @@ class UserTable extends React.Component {
 
         return (
             <React.Fragment>
-                <Table title={() => this.props.lesson} dataSource={datas} columns={this.columns} scroll={{ y: 500 }} pagination={false} />
+                <Table title={() => "scanner: " + this.props.event} dataSource={datas} columns={this.columns} scroll={{ y: 500 }} pagination={false} />
             </React.Fragment>
         );
     }

@@ -15,9 +15,6 @@ channel.bind(sessionStorage.getItem("scanner"), function (data) {
     axios.post('/student-has-lesson', {
         'serial': data,
         'lesson_id': sessionStorage.getItem("lesson_id")
-    })
-    .then(function (response) {
-        console.log(response);
     });
 });
 
@@ -53,7 +50,7 @@ class ActiveLessonView extends React.Component {
         lesson: {
             channel: 'backToFront',
             event: "none",
-            name: sessionStorage.getItem('coursename'),
+            name: sessionStorage.getItem('lesson_id'),
             id: '1'
         }
     }

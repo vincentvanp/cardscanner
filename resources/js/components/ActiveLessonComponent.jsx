@@ -12,15 +12,10 @@ var channel = pusher.subscribe('scanner-channel');
 
 channel.bind(sessionStorage.getItem("scanner"), function(data) {
 
-    axios.post('/student-has-lesson', {
-        serial: data,
-        lesson: sessionStorage.getItem("lesson_id")
-    }).then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // axios.post('/student-has-lesson', {
+    //     serial: data,
+    //     lesson: sessionStorage.getItem("lesson_id")
+    // });
 });
 
 class ActiveLesson extends React.Component {

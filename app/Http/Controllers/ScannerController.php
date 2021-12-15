@@ -37,7 +37,6 @@ class ScannerController extends Controller
         $time = Carbon::parse($student->lessons()->first()->pivot->updated_at)->format('H:i');
         
         event(new populateUserTable($student->name, $request["serial"], $time));
-        //event(new populateUserTable("test"));
         
         // return json_encode(array(
             //     'name' => $student->name,

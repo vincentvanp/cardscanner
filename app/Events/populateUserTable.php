@@ -16,20 +16,20 @@ class populateUserTable implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $name;
-    public $id;
-    public $time;
+    public $serial_number;
+    public $updated_at;
     
     /** 
     * 
     * 
-    * @return void
+    * @return voserial_number
     */
 
-    public function __construct($name, $id, $time)
+    public function __construct($name, $serial_number, $updated_at)
     {
         $this->name = $name;
-        $this->id = $id;
-        $this->time = $time;
+        $this->serial_number = $serial_number;
+        $this->updated_at = $updated_at;
     }
 
     /** 

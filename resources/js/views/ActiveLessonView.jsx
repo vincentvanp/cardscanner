@@ -14,7 +14,10 @@ channel.bind(sessionStorage.getItem("scanner"), function (data) {
 
     axios.post('/student-has-lesson', {
         'serial': data,
-        'lesson': sessionStorage.getItem("coursename")
+        'lesson_id': sessionStorage.getItem("lesson_id")
+    })
+    .then(function (response) {
+        console.log(response);
     });
 });
 
@@ -64,7 +67,7 @@ class ActiveLessonView extends React.Component {
         this.setState({ lesson: {
                             channel: 'backToFront',
                             event: data.id,
-                            name: sessionStorage.getItem('coursename'),
+                            name: sessionStorage.getItem('lesson_id'),
                             id: '1'
                         }});
     }
@@ -88,6 +91,7 @@ class ActiveLessonView extends React.Component {
     render() {
 
         const {lesson} = this.state;
+
         
         if(lesson.event == "none"){
             return(

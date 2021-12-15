@@ -33,12 +33,12 @@ class PreviousDetail extends React.Component{
         },
         {
             title: 'Student Id',
-            dataIndex: 'serial',
+            dataIndex: 'serial_number',
             key: 'studentId',
         },
         {
             title: 'Time',
-            dataIndex: 'time',
+            dataIndex: 'updated_at',
             key: 'time',
         }
     ]

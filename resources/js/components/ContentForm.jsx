@@ -59,6 +59,9 @@ class ContentForm extends React.Component{
 
         this.UserHasLesson(values["lesson_id"]);
 
+        console.log( values['lesson_id']);
+        console.log( values['scanner']);
+
         sessionStorage.setItem("lesson_id", values['lesson_id']);
         sessionStorage.setItem("scanner", values['scanner']);
     

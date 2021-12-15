@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Events\populateUserTable;
 use App\Models\Scanner;
 use App\Models\Student;
 use App\Models\Lesson;
@@ -19,9 +20,6 @@ class ScannerController extends Controller
     //Function to store a scanned student from pusher in the database
     public function storeStudent(Request $request)
     {
-
-        return $request;
-
         $student = Student::where('serial_number', $request["serial"])->first();
         $lesson = Lesson::where('id', $request["lesson_id"])->first();
 
@@ -37,13 +35,16 @@ class ScannerController extends Controller
         }
 
         $time = Carbon::parse($student->lessons()->first()->pivot->updated_at)->format('H:i');
-
-        event(new populateUserTable($student->name, $request["serial"], $date));
-
-        return json_encode(array(
-            'name' => $student->name,
-            'serial' => $request["serial"],
-            'time' => $time,
-        ));
+        
+        event(new populateUserTable($student->name, $request["serial"], $time));
+        //event(new populateUserTable("test"));
+        
+        // return json_encode(array(
+            //     'name' => $student->name,
+            //     'serial' => $request["serial"],
+            //     'time' => $time,
+            // ));
+            
+        return ['status' => 'OK'];
     }
 }

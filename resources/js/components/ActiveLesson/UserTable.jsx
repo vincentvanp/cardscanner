@@ -9,23 +9,28 @@ class UserTable extends React.Component {
     }
 
     pusherBind(channel, event) {
+
         this.pusher = new Pusher(process.env.MIX_PUSHER_APP_KEY, {
             cluster: 'eu'
         });
+
         this.channel = this.pusher.subscribe(channel);
 
         this.channel.bind(event, this.receiveUpdateFromPusher)
     }
 
     componentDidMount() {
+
         this.pusherBind(this.props.channel, this.props.event);
     }
 
     receiveUpdateFromPusher = data => {
 
+        console.log(data);
+
         // pusherData looks like this {"studentName": "Name", "studentId": 1234, "time": "12:30"}
-        const studentData = [data, ...this.state.studentData];
-        this.setState({ studentData });
+        // const studentData = [data, ...this.state.studentData];
+        // this.setState({ studentData });
     }
 
     columns = [

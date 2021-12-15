@@ -14,8 +14,13 @@ channel.bind(sessionStorage.getItem("scanner"), function(data) {
 
     axios.post('/student-has-lesson', {
         serial: data,
-        lesson: sessionStorage.getItem("coursename")
-    });
+        lesson: sessionStorage.getItem("lesson_id")
+    }).then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 });
 
 class ActiveLesson extends React.Component {
@@ -33,11 +38,7 @@ class ActiveLesson extends React.Component {
     }
 
     async GetUserData(){
-        let data = await axios.post('/get-user-data')
-        .then(function(response){
-            console.log(response.data);
-            return response.data;
-        }).catch(e => console.log(e));
+        const data = await axios.post('/get-user-data');
         
         this.setState({ user: data});
     }

@@ -60,19 +60,24 @@ class UserTable extends React.Component {
 
     render() {
 
-        const datas = [...this.state.studentData];
-
         const {lessonData} = this.state;
 
+        const datas = [...this.state.studentData];
+
         lessonData.map((data) => {
-            datas.push(data);
+            var updated_at = data.updated_at.split(" ");
+            if(updated_at[1] != undefined){
+                updated_at = updated_at[1].split(":");
+                data.updated_at = updated_at[0] +":"+updated_at[1];
+                datas.push(data);
+            }else{
+                datas.push(data);
+            }
         })
 
-        console.log(datas);
-
-        datas.map((data, index) =>
+        datas.map((data, index) =>{
             data.key = index
-        )
+        })
 
         return (
             <React.Fragment>

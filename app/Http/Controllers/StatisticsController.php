@@ -25,12 +25,12 @@ class StatisticsController extends Controller
         $totalStudents = count($lesson->students);
         $lateStudents = 0;
 
+        dd($lesson->lateStudents($lesson->start));
+        /*foreach($lesson->lateStudents($lesson->start) as $student){
 
-        foreach($lesson->presentStudents->wherePivot('updated_at' > $lesson->start) as $student){
+            echo $student;
 
-            echo 'hey';
-
-        }
+        }*/
 
     }
 

@@ -44,7 +44,10 @@ class Lesson extends Model
     }
 
     public function lateStudents($start){
-        return $this->belongsToMany(Student::class, 'student_has_lesson', 'lesson_id')->wherePivot('present', 1)->withTimeStamps();
+        return $this->belongsToMany(Student::class, 'student_has_lesson', 'lesson_id')
+        ->wherePivot('present', 1)
+        ->wherePivot('updated_at', '>', $start)
+        ->withTimeStamps();
     }
 
     public function courses()

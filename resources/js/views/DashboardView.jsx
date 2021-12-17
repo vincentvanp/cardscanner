@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Layout } from 'antd';
 
 import ContentForm from '../components/ContentForm';
-import PreviousLessons from '../components/previousLessons';
+import DashboardCharts from '../components/dashboardCharts';
 
 
 class DashboardView extends React.Component {
+
+
     render() {
         return (
             <Layout className="container--content">
@@ -13,6 +15,7 @@ class DashboardView extends React.Component {
                     <h1 className="text--page-title">Dashboard</h1>
                 </div>
                 <div className="container--page">
+                    <DashboardCharts/>
                     <ContentForm/>
                 </div>
             </Layout>

@@ -1,13 +1,13 @@
 import React from "react";
 
 import { Chart as ChartJS } from 'chart.js/auto'
-import { Pie } from 'react-chartjs-2'
+import { Line } from 'react-chartjs-2'
 
-const PieChart = (dataSet) =>{
+const LineChart = (dataSet) =>{
 
 
     return(
-        <Pie 
+        <Line 
             data={{
                 labels: dataSet.dataSet.labels,
                 datasets: [{
@@ -38,4 +38,4 @@ const PieChart = (dataSet) =>{
     );
 }
 
-export default PieChart;
+export default LineChart;

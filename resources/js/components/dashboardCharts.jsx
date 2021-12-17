@@ -1,6 +1,7 @@
 import React from "react";
 
 import PieChart from "../components/Charts/PieChart";
+import LineChart from "./Charts/LineChart";
 
 const axios = require('axios').default;
 
@@ -34,6 +35,7 @@ class dashboardCharts extends React.Component {
             return (
                 <div className="chart">
                     <PieChart dataSet={dataSet}/>
+                    <LineChart dataSet={dataSet}/>
                 </div>
             );
         }

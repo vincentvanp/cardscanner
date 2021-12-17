@@ -21,17 +21,29 @@ class StatisticsController extends Controller
     //% of people who were late
     public function latePercentage(/*Request $request*/){
 
-        $lesson = Lesson::where('id', /*$request['id']*/ '1')->first();
+        /*$lesson = Lesson::where('id', /*$request['id'] '1')->first();
         $totalStudents = count($lesson->students);
         $lateStudents = 0;
 
         dd($lesson->lateStudents($lesson->start));
-        /*foreach($lesson->lateStudents($lesson->start) as $student){
+        foreach($lesson->lateStudents($lesson->start) as $student){
 
             echo $student;
 
         }*/
 
+        $lesson = Lesson::where('id', /*$request['id']*/ '1')->first();
+
+        //return $lesson->getStudents;
+        //dd($lesson->getStudents);
+        
+        foreach($lesson->getStudents as $student)
+        {
+
+            echo $student->pivot->updated_at;
+
+        }
+        
     }
 
     //Average attendance per course

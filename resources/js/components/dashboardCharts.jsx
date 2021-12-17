@@ -1,52 +1,23 @@
-import React, { useState, useEffect } from "react"
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js'
-import { Chart } from "react-chartjs-2";
+import React from "react";
 
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-)
+import PieChart from "../components/Charts/PieChart";
+
 const axios = require('axios').default;
 
 class dashboardCharts extends React.Component {
     state = {
-        charData: ""
+        dataSet: {
+            data: "",
+            labels: ""
+        },
     }
 
     async getChartData(){
         const res = await axios.get("https://api.coincap.io/v2/assets/?limit=5");
         const datas = res.data.data;
 
-        this.setState({ charData: {
-                            labels: datas.map(data => data.name),
-                            datasets: [
-                                {
-                                label: "Price in USD",
-                                data: datas.map(data => data.priceUsd),
-                                backgroundColor: [
-                                    "#ffbb11",
-                                    "#ecf0f1",
-                                    "#50AF95",
-                                    "#f3ba2f",
-                                    "#2a71d0"
-                                ]
-                                }
-                            ]
-                        }})
+        this.setState({ dataSet: {data: datas.map((data) => (data.priceUsd)),
+                        labels: datas.map((data) => (data.name))}})    
     }
 
     componentDidMount(){
@@ -55,35 +26,14 @@ class dashboardCharts extends React.Component {
 
     render(){
 
-        const {charData} = this.state;
-        
-        console.log(charData);
+        const {dataSet} = this.state;
 
-        if(charData == ""){
+        if(dataSet.data == ""){
             return <h1>test</h1>
         }else{
             return (
-                <div className="App">
-                    <div>
-                        {/* {charData.labels.map((data) => (
-                            <h1>{data}</h1>
-                        ))} */}
-                        <Chart
-                            data={charData}
-                            options={{
-                                plugins: {
-                                    title: {
-                                        display: true,
-                                        text: "Cryptocurrency prices"
-                                    },
-                                    legend: {
-                                        display: true,
-                                        position: "bottom"
-                                    }
-                                }
-                            }}
-                        />
-                    </div>
+                <div className="chart">
+                    <PieChart dataSet={dataSet}/>
                 </div>
             );
         }

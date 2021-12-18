@@ -19,11 +19,13 @@ class Student extends Model
         'serial_number'
     ];
 
-    public function lessons(){
+    public function lessons()
+    {
         return $this->belongsToMany(Lesson::class, 'student_has_lesson', 'student_id')->withPivot('present')->withTimeStamps();
     }
 
-    public function attendedLessons(){
+    public function attendedLessons()
+    {
         return $this->belongsToMany(Lesson::class, 'student_has_lesson', 'student_id')->wherePivot('present', 1);
     }
     

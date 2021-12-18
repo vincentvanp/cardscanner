@@ -26,21 +26,34 @@ class Lesson extends Model
         'start'
     ];
     
-    public function users(){
-        return $this->belongsToMany(User::class, 'user_has_lesson', 'lesson_id')->withPivot('is_previous')->withTimeStamps();
+    public function users() 
+    {
+        return $this->belongsToMany(User::class, 'user_has_lesson', 'lesson_id') ->withPivot('is_previous')->withTimeStamps();
     }
     
 
-    public function students(){
-        return $this->belongsToMany(Student::class, 'student_has_lesson', 'lesson_id')->withPivot('present')->withTimeStamps();
+    public function students() 
+    {
+        return $this->belongsToMany(Student::class, 'student_has_lesson', 'lesson_id');
     }
 
-    public function abscentStudents(){
-        return $this->belongsToMany(Student::class, 'student_has_lesson', 'lesson_id')->wherePivot('present', 0)->withTimeStamps();
+    public function getStudents()
+    {
+        return $this->students()->withPivot('present')->withTimeStamps();
     }
 
-    public function presentStudents(){
-        return $this->belongsToMany(Student::class, 'student_has_lesson', 'lesson_id')->wherePivot('present', 1)->withTimeStamps();
+    public function abscentStudents() 
+    {
+        return $this->belongsToMany(Student::class, 'student_has_lesson', 'lesson_id')
+                    ->wherePivot('present', 0)
+                    ->withTimeStamps();
+    }
+
+    public function presentStudents() 
+    {
+        return $this->belongsToMany(Student::class, 'student_has_lesson', 'lesson_id')
+                    ->wherePivot('present', 1)
+                    ->withTimeStamps();
     }
 
     public function courses()

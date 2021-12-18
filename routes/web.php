@@ -9,6 +9,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\StatisticsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,8 @@ Route::get('oauth/callback/{provider}', [oAuthController::class, 'handleProvider
 
 Route::view('/login-admin', 'login')->where('login', '.*');
 
-Route::view('/{any}', 'dashboard')->where('any', '.*');
+//Route::view('/{any}', 'dashboard')->where('any', '.*');
+Route::get('test', [StatisticsController::class, 'latePercentage']);
 
 Route::group(['middleware' => ['auth']], function () {
     //only authorized users can access these routes

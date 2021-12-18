@@ -27,7 +27,8 @@ Route::get('oauth/callback/{provider}', [oAuthController::class, 'handleProvider
 
 Route::view('/login-admin', 'login')->where('login', '.*');
 
-Route::view('/{any}', 'dashboard')->where('any', '.*');
+//Route::view('/{any}', 'dashboard')->where('any', '.*');
+Route::get('test', [CourseController::class, 'getUserCourses']);
 
 Route::group(['middleware' => ['auth']], function () {
     //only authorized users can access these routes

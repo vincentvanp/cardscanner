@@ -15,14 +15,14 @@ class CourseController extends Controller
     public function getUserCourses()
     {
         $courses = Auth::user()
-                        ->leftJoin('user_has_lesson', 'users.id', '=', 'user_has_lesson.user_id')
-                        ->leftJoin('lessons', 'lessons.id','=','user_has_lesson.lesson_id')
-                        ->leftJoin('courses','courses.id','=','lessons.course_id')
+                        ->join('user_has_lesson', 'users.id', '=', 'user_has_lesson.user_id')
+                        ->join('lessons', 'lessons.id','=','user_has_lesson.lesson_id')
+                        ->join('courses','courses.id','=','lessons.course_id')
                         ->select('courses.id', 'courses.name')
                         ->distinct()
                         ->get();
         
-        return $courses->toJson();  
+        return $courses->toJson(); 
     }
 
 }

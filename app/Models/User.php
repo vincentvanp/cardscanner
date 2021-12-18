@@ -44,18 +44,22 @@ class User extends Authenticatable
 
     protected $visible = [
         'id',
-        'name'
+        'name',
+        'scancount'
     ];
 
-    public function lessons(){
+    public function lessons()
+    {
         return $this->belongsToMany(Lesson::class, 'user_has_lesson', 'user_id')->withPivot('is_previous')->withTimeStamps();
     }
 
-    public function previousLessons(){
+    public function previousLessons()
+    {
         return $this->belongsToMany(Lesson::class, 'user_has_lesson', 'user_id')->wherePivot('is_previous', 1)->withTimeStamps();
     }
 
-    public function unstartedLessons(){
+    public function unstartedLessons()
+    {
         return $this->belongsToMany(Lesson::class, 'user_has_lesson', 'user_id')->wherePivot('is_previous', 0)->withTimeStamps();
     }
 }

@@ -10,50 +10,42 @@ use Auth;
 
 class StatisticsController extends Controller
 {
-    //Total scans for teacher
-    public function totalScans(){
-        
-        
+    //% of people who were late based on a given lesson id
+    public function latePercentage(Request $request)
+    {
 
-    }
+        $lateStudents = array();
 
+        $lesson = Lesson::where('id', $request['id'])->first();
 
-    //% of people who were late
-    public function latePercentage(/*Request $request*/){
+        $students = $lesson->getStudents;
 
-        /*$lesson = Lesson::where('id', /*$request['id'] '1')->first();
-        $totalStudents = count($lesson->students);
-        $lateStudents = 0;
-
-        dd($lesson->lateStudents($lesson->start));
-        foreach($lesson->lateStudents($lesson->start) as $student){
-
-            echo $student;
-
-        }*/
-
-        $lesson = Lesson::where('id', /*$request['id']*/ '1')->first();
-
-        //return $lesson->getStudents;
-        //dd($lesson->getStudents);
-        
-        foreach($lesson->getStudents as $student)
+        foreach($students as $student)
         {
 
-            echo $student->pivot->updated_at;
+            if($student->pivot->updated_at > $lesson->start && $student->pivot->present)
+            {
+
+                array_push($lateStudents, $student);
+
+            }
 
         }
+
+        return json_encode((count($lateStudents)/count($students)) * 100);
         
     }
 
     //Average attendance per course
-    public function courseAttendence(Request $request){
+    public function courseAttendence(Request $request)
+    {
 
         $course = Course::where('id', $request['id'])->first();
         $totalStudents = 0;
         $attandingStudents = 0;
 
-        foreach($course->lessons as $lesson){
+        foreach($course->lessons as $lesson)
+        {
 
             $totalStudents += count($lesson->students);
             $attandingStudents += count($lesson->presentStudents);

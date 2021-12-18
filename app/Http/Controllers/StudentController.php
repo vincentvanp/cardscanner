@@ -9,7 +9,7 @@ use DB;
 
 class StudentController extends Controller
 {
-    //Function to retrieve attending students $request gives a lesson id?
+    //Function to retrieve attending students $request gives a lesson id
     public function getAttendingStudents(Request $request)
     {
 

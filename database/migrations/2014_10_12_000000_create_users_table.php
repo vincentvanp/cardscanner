@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->string('serial_number')->nullable();
             $table->rememberToken();
+            $table->integer('scancount')->default('0');
             $table->timestamps();
         });
     }

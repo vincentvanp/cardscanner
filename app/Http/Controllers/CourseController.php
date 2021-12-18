@@ -14,7 +14,8 @@ class CourseController extends Controller
     //Function to retun all courses of the current user: returns an array with courseobjects
     public function getUserCourses()
     {
-        $courses = Auth::find(1)
+        $courses = DB::table('users')
+                        ->where('users.id', '=', Auth::user()->id)
                         ->join('user_has_lesson', 'users.id', '=', 'user_has_lesson.user_id')
                         ->join('lessons', 'lessons.id','=','user_has_lesson.lesson_id')
                         ->join('courses','courses.id','=','lessons.course_id')

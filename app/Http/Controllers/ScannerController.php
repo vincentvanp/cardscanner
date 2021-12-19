@@ -7,8 +7,10 @@ use App\Events\populateUserTable;
 use App\Models\Scanner;
 use App\Models\Student;
 use App\Models\Lesson;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Auth;
 
 class ScannerController extends Controller
 {
@@ -22,6 +24,7 @@ class ScannerController extends Controller
     {
         $student = Student::where('serial_number', $request["serial"])->first();
         $lesson = Lesson::where('id', $request["lesson_id"])->first();
+        $user = Auth::user();
 
         $attendedLessons = $student->attendedLessons;
 
@@ -37,6 +40,10 @@ class ScannerController extends Controller
         $time = Carbon::parse($student->lessons()->first()->pivot->updated_at)->format('H:i');
         
         event(new populateUserTable($student->name, $request["serial"], $time));
+
+        $user->scancount += 1;
+        $user->save();
+
         
         // return json_encode(array(
             //     'name' => $student->name,

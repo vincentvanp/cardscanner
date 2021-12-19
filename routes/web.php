@@ -1,7 +1,7 @@
 <?php
 
 use App\Events\LessonCreated;
-use App\Http\Controllers\lessonController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\oAuth\oAuthController;
 use App\Http\Controllers\ScannerController;
 use App\Http\Controllers\StartCourseForm;

@@ -5,16 +5,16 @@
     src: url(../fonts/KdG-Regular.woff);
 }
 
+@import "../js/atoms/Button/Button";
+@import "../js/atoms/Image/Image";
+@import "../js/molecule/Card/Card";
+@import "../js/molecule/Select/Select";
+@import "../js/organism/Modal/Modal";
+@import "../js/organism/Sidebar/Sidebar";
+
 @import "atoms/text";
-@import "atoms/buttons";
 @import "atoms/links";
-@import "atoms/images";
-@import "molecules/card";
-@import "molecules/select";
 @import "organisms/containers";
 @import "organisms/form";
-@import "organisms/modal";
-@import "organisms/sidebar";
-@import "pages/home";
 @import "pages/ant";
-@import "pages/pages.scss";
+@import "pages/pages";

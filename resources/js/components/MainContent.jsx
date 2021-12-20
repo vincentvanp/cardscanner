@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 
 const { Content } = Layout;
 
-class MainContent extends React.Component {
+class MainContent extends Component {
 
     render() {
         return (

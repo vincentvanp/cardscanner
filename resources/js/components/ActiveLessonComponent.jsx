@@ -1,5 +1,6 @@
 import { Button } from 'antd';
-import React from 'react';
+import React, {Component} from 'react';
+
 import UserTable from './ActiveLesson/UserTable';
 
 window.Pusher = require('pusher-js');
@@ -18,7 +19,7 @@ channel.bind(sessionStorage.getItem("scanner"), function(data) {
     });
 });
 
-class ActiveLesson extends React.Component {
+class ActiveLesson extends Component {
     state = {
         lesson: {
             channel: 'backToFront',

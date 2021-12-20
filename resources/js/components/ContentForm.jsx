@@ -1,6 +1,6 @@
-import { Form, Modal, Button, Select } from 'antd';
+import { Form, Modal, Select } from 'antd';
+import {Button as AntButton} from "antd";
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
 
 import { ClockCircleOutlined } from '@ant-design/icons';
 
@@ -81,7 +81,7 @@ function ContentForm() {
 
     return (
         <div className="form--button">
-            <Button className="button--form" type="primary" onClick={showModal}><ClockCircleOutlined />start les</Button>
+            <AntButton className="button--form" type="primary" onClick={showModal}><ClockCircleOutlined />start les</AntButton>
             <Modal
                 title="start les"
                 visible={isModalVisible}
@@ -116,9 +116,9 @@ function ContentForm() {
                         </Select>
                     </Form.Item>
                     <Form.Item wrapperCol={{ span: 16 }}>
-                        <Button className="button--lesson-form" type="primary" htmlType="submit">
+                        <AntButton className="button--lesson-form" type="primary" htmlType="submit">
                             start
-                        </Button>
+                        </AntButton>
                     </Form.Item>
                 </Form>
             </Modal>

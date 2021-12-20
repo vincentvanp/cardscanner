@@ -1,0 +1,25 @@
+.ant-modal-content, .ant-modal-header{
+    background-color: #262626 !important; 
+    color: #fff !important;
+    border-bottom: solid 1px #535353 !important;
+}
+
+.ant-modal-footer{
+    border-top: none !important;
+}
+
+.ant-form-horizontal{
+    display: flex;
+
+}
+
+.ant-modal-title{
+    color: #fff !important;
+    font-family: KDG;
+    text-align: center;
+    font-size: 26px !important;
+}
+
+.ant-modal-close-x{
+    color: white;
+}

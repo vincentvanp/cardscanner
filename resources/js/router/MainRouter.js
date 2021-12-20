@@ -5,8 +5,6 @@ import React, { Component } from 'react';
 import {
     Routes,
     Route,
-    BrowserRouter,
-    Link,
     Navigate,
     Outlet
 } from "react-router-dom";

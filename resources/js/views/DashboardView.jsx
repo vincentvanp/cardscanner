@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 
 import ContentForm from '../components/ContentForm';
-import PreviousLessons from '../components/previousLessons';
 
 
 class DashboardView extends React.Component {

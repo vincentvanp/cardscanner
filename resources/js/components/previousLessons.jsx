@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React from 'react';
+import React, {Component} from 'react';
 
 import LessonCard from './LessonCard';
 
 import { Space } from 'antd';
 
-class PreviousLessons extends React.Component {
+class PreviousLessons extends Component {
     state = {
         lessons: []
     }

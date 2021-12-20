@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import Sidebar from '../components/Sidebar';
-import { Layout, PageHeader } from 'antd';
+import { Layout } from 'antd';
+
+import Sidebar from '../organism/Sidebar/Sidebar';
 
 import ScannerHeader from '../components/layoutComponents/header';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Content } = Layout;
 
-class LayoutView extends React.Component {
+class LayoutView extends Component {
 
     render() {
         return (

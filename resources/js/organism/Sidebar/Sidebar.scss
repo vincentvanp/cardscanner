@@ -1,0 +1,41 @@
+.sidebar{
+    background-color: #201F1F !important;
+    width: 250px !important;
+    position: relative !important;
+    height: 100vh !important;
+}
+
+.sidebar--bottom{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.user{
+    display: flex;
+    align-items: center;
+    padding: 10px 0 10px 20px;
+    border-top: 1px solid white !important;
+    border-bottom: 1px solid white !important;
+}
+
+.ant-menu-item{
+    padding: 40px 0 40px 20px !important;
+    margin: 0 !important;
+    border-top: 1px solid white !important;
+    border-bottom: 1px solid white !important;
+}
+
+.ant-menu-title-content span{
+    padding: 0 10px 0 0;
+}
+
+.ant-menu-title-content{
+    font-size: 24px;
+}
+
+.ant-menu-title-content svg{
+    width: 25px;
+    height: 25px;
+}

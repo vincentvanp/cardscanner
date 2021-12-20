@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Table } from 'antd';
 import Pusher from "pusher-js"
 
-class UserTable extends React.Component {
+class UserTable extends Component {
 
     state = {
         studentData: []

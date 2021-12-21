@@ -59,14 +59,14 @@ class dashboardCharts extends React.Component {
     render(){
 
         const {dataSet1, dataSet2} = this.state;
-        
+
         if(dataSet1.data == ""){
             return <h1>test</h1>
         }else{
             return (
                 <div className="chart">
-                    <BarChart dataSet={dataSet1} name="percentage aanwezig per les"/>
-                    <BarChart dataSet={dataSet2} name="percentage te laat per les"/>
+                    <BarChart dataSet={dataSet1} name="% aanwezig per les"/>
+                    <BarChart dataSet={dataSet2} name="% te laat per les"/>
                 </div>
             );
         }

@@ -1,7 +1,6 @@
 import React from "react";
 
-import { Chart as ChartJS } from 'chart.js/auto'
-import { Bar } from 'react-chartjs-2'
+import { Bar } from 'react-chartjs-2';
 
 const BarChart = (props) =>{
 
@@ -20,6 +19,7 @@ const BarChart = (props) =>{
                         'rgba(153, 102, 255, 1)',
                         'rgba(255, 159, 64, 1)'
                     ],
+                    barPercentage: 0.7,
                 }]
             }}
         />

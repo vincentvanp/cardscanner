@@ -8,11 +8,7 @@ const axios = require('axios').default;
 
 class dashboardCharts extends React.Component {
     state = {
-        dataSet1: {
-            data: "",
-            labels: ""
-        },
-        dataSet2: {
+        dataSet: {
             data: "",
             labels: ""
         },
@@ -35,20 +31,31 @@ class dashboardCharts extends React.Component {
         const lessons = await axios.post('/previous-lessons');
 
         var percentageArray2 = [];
-        var labels2 = [];
+        var array = [];
+        var count = [];
+        
+        for(let i = 0; i < lessons.data.lessons.length; i++){
+            const latePercentage = await axios.post('/get-late-percentage', {id: lessons.data.lessons[i].id});
+            
+            if(array[lessons.data.lessons[i].course_id - 1] == undefined){
+                count[lessons.data.lessons[i].course_id - 1] = 1;
+                array[lessons.data.lessons[i].course_id - 1] = latePercentage.data;
+            }else{
+                count[lessons.data.lessons[i].course_id - 1] += 1;
+                array[lessons.data.lessons[i].course_id - 1] += latePercentage.data;
+            }
+        }
+        
+        for(let i = 0; i < array.length; i++){
 
-        for(let j = 0; j < lessons.data.lessons.length; j++){
-            const latePercentage = await axios.post('/get-late-percentage', {id: lessons.data.lessons[j].id});
-    
-            percentageArray2.push(latePercentage.data);
-            labels2.push(lessons.data.lessons[j].name);
+            var avgPercentage = array[i]/count[i];
+            percentageArray2.push(avgPercentage);
         }
 
-        this.setState({ dataSet1: {data: percentageArray,
-                                    labels: labels}});
+        const chartData = {0: percentageArray, 1: percentageArray2}
 
-        this.setState({ dataSet2: {data: percentageArray2,
-                                    labels: labels2}})
+        this.setState({ dataSet: {data: chartData,
+                                    labels: labels}});
                                     
     }
 
@@ -58,15 +65,14 @@ class dashboardCharts extends React.Component {
 
     render(){
 
-        const {dataSet1, dataSet2} = this.state;
+        const {dataSet} = this.state;
 
-        if(dataSet1.data == ""){
+        if(dataSet.data == ""){
             return <h1>test</h1>
         }else{
             return (
                 <div className="chart">
-                    <BarChart dataSet={dataSet1} name="% aanwezig per les"/>
-                    <BarChart dataSet={dataSet2} name="% te laat per les"/>
+                    <BarChart dataSet={dataSet} name="% aanwezig per les"/>
                 </div>
             );
         }

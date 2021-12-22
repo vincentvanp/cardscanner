@@ -8,19 +8,30 @@ const BarChart = (props) =>{
         <Bar 
             data={{
                 labels: props.dataSet.labels,
-                datasets: [{
+                datasets: [
+                {
                     label: props.name,
-                    data: props.dataSet.data,
+                    data: props.dataSet.data[0],
                     backgroundColor: [
                         'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
                     ],
                     barPercentage: 0.7,
-                }]
+                },
+                {
+                    label: props.name,
+                    data: props.dataSet.data[1],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    barPercentage: 0.8,
+                }],
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
             }}
         />
     );

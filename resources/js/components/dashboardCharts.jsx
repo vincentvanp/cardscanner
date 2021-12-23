@@ -18,40 +18,40 @@ class dashboardCharts extends React.Component {
     async getChartData(){
         
         const {data} = await axios.post('/get-courses');
-        
+        var courses = [];
+
         var attendanceArray = [];
         
         for(let i = 0; i < data.length; i++){
             const res = await axios.post("/get-course-attendence", {id: data[i].id});
 
+            courses.push([data[i].name]);
+
             attendanceArray.push([data[i].name, [res.data, 100 - res.data]]);
         }
 
-        // const lessons = await axios.post('/previous-lessons');
+        const lessons = await axios.post('/previous-lessons');
 
-        // var percentageArray2 = [];
-        // var array = [];
-        // var count = [];
+        var lateStudentsArray = [];
         
-        // for(let i = 0; i < lessons.data.lessons.length; i++){
-        //     const latePercentage = await axios.post('/get-late-percentage', {id: lessons.data.lessons[i].id});
-            
-        //     if(array[lessons.data.lessons[i].course_id - 1] == undefined){
-        //         count[lessons.data.lessons[i].course_id - 1] = 1;
-        //         array[lessons.data.lessons[i].course_id - 1] = latePercentage.data;
-        //     }else{
-        //         count[lessons.data.lessons[i].course_id - 1] += 1;
-        //         array[lessons.data.lessons[i].course_id - 1] += latePercentage.data;
-        //     }
-        // }
-        
-        // for(let i = 0; i < array.length; i++){
+        for(let i = 0; i < lessons.data.lessons.length; i++){
+            const latePercentage = await axios.post('/get-late-percentage', {id: lessons.data.lessons[i].id});
 
-        //     var avgPercentage = array[i]/count[i];
-        //     percentageArray2.push(avgPercentage);
-        // }
+            lateStudentsArray.push([lessons.data.lessons[i].course_id, latePercentage.data]);
+        }
 
-        // const chartData = {0: attendanceArray, 1: percentageArray2}
+        for(let i = 0; i < lateStudentsArray.length; i++){
+            for(let j = 0; j < courses.length; j++){
+
+                if(data[j].id == lateStudentsArray[i][0]){
+                    courses[j].push(lateStudentsArray[i][1]);
+                }
+            }
+        }
+
+        for(let i = 0; i < courses.length; i++){
+            courses[i].shift();
+        }
 
         this.setState({ dataSet: attendanceArray});
                                     
@@ -65,10 +65,8 @@ class dashboardCharts extends React.Component {
 
         const {dataSet} = this.state;
 
-        console.log(dataSet);
-
         if(dataSet.data == ""){
-            return <h1>test</h1>
+            return <h1>loading...</h1>
         }else{
             return (
                 <div className="List--courses">

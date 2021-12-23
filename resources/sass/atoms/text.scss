@@ -66,3 +66,14 @@
     font-size: 20px;
     padding: 10px 0 0 0;
 }
+
+.List--courses{
+    width: 40%;
+}
+
+.ant-list-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

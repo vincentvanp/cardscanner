@@ -1,4 +1,5 @@
 import React from "react";
+import { List } from 'antd';
 
 import BarChart from "../components/Charts/BarChart";
 import PieChart from "../components/Charts/PieChart";
@@ -18,15 +19,12 @@ class dashboardCharts extends React.Component {
         
         const {data} = await axios.post('/get-courses');
         
-        var percentageArray = [];
-        var labels = [];
+        var attendanceArray = [];
         
         for(let i = 0; i < data.length; i++){
             const res = await axios.post("/get-course-attendence", {id: data[i].id});
 
-            labels.push(data[i].name);
-
-            percentageArray.push([res.data, 100 - res.data]);
+            attendanceArray.push([data[i].name, [res.data, 100 - res.data]]);
         }
 
         // const lessons = await axios.post('/previous-lessons');
@@ -53,10 +51,9 @@ class dashboardCharts extends React.Component {
         //     percentageArray2.push(avgPercentage);
         // }
 
-        // const chartData = {0: percentageArray, 1: percentageArray2}
+        // const chartData = {0: attendanceArray, 1: percentageArray2}
 
-        this.setState({ dataSet: {data: percentageArray,
-                                    labels: labels}});
+        this.setState({ dataSet: attendanceArray});
                                     
     }
 
@@ -68,15 +65,27 @@ class dashboardCharts extends React.Component {
 
         const {dataSet} = this.state;
 
+        console.log(dataSet);
+
         if(dataSet.data == ""){
             return <h1>test</h1>
         }else{
             return (
-                <div className="chart">
-                    
-                    {dataSet.data.map((data) => {
-                        return <PieChart dataSet={data} name={["% aanwezig" , "% afwezig"]}/>;
-                    })}
+                <div className="List--courses">
+                    <List
+                        className="list--chart"
+                        pagination={{
+                            pageSize: 1,
+                        }}
+                        header={<h3 style={{margin: 0}} >Vakken</h3>}
+                        bordered
+                        dataSource={dataSet}
+                        renderItem={item => (
+                            <List.Item>
+                                <PieChart dataSet={item}/>
+                            </List.Item>
+                        )}
+                    />
                 </div>
             );
         }

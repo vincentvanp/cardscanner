@@ -25,36 +25,37 @@ class dashboardCharts extends React.Component {
             const res = await axios.post("/get-course-attendence", {id: data[i].id});
 
             labels.push(data[i].name);
-            percentageArray.push(res.data);
+
+            percentageArray.push([res.data, 100 - res.data]);
         }
 
-        const lessons = await axios.post('/previous-lessons');
+        // const lessons = await axios.post('/previous-lessons');
 
-        var percentageArray2 = [];
-        var array = [];
-        var count = [];
+        // var percentageArray2 = [];
+        // var array = [];
+        // var count = [];
         
-        for(let i = 0; i < lessons.data.lessons.length; i++){
-            const latePercentage = await axios.post('/get-late-percentage', {id: lessons.data.lessons[i].id});
+        // for(let i = 0; i < lessons.data.lessons.length; i++){
+        //     const latePercentage = await axios.post('/get-late-percentage', {id: lessons.data.lessons[i].id});
             
-            if(array[lessons.data.lessons[i].course_id - 1] == undefined){
-                count[lessons.data.lessons[i].course_id - 1] = 1;
-                array[lessons.data.lessons[i].course_id - 1] = latePercentage.data;
-            }else{
-                count[lessons.data.lessons[i].course_id - 1] += 1;
-                array[lessons.data.lessons[i].course_id - 1] += latePercentage.data;
-            }
-        }
+        //     if(array[lessons.data.lessons[i].course_id - 1] == undefined){
+        //         count[lessons.data.lessons[i].course_id - 1] = 1;
+        //         array[lessons.data.lessons[i].course_id - 1] = latePercentage.data;
+        //     }else{
+        //         count[lessons.data.lessons[i].course_id - 1] += 1;
+        //         array[lessons.data.lessons[i].course_id - 1] += latePercentage.data;
+        //     }
+        // }
         
-        for(let i = 0; i < array.length; i++){
+        // for(let i = 0; i < array.length; i++){
 
-            var avgPercentage = array[i]/count[i];
-            percentageArray2.push(avgPercentage);
-        }
+        //     var avgPercentage = array[i]/count[i];
+        //     percentageArray2.push(avgPercentage);
+        // }
 
-        const chartData = {0: percentageArray, 1: percentageArray2}
+        // const chartData = {0: percentageArray, 1: percentageArray2}
 
-        this.setState({ dataSet: {data: chartData,
+        this.setState({ dataSet: {data: percentageArray,
                                     labels: labels}});
                                     
     }
@@ -72,7 +73,10 @@ class dashboardCharts extends React.Component {
         }else{
             return (
                 <div className="chart">
-                    <BarChart dataSet={dataSet} name="% aanwezig per les"/>
+                    
+                    {dataSet.data.map((data) => {
+                        return <PieChart dataSet={data} name={["% aanwezig" , "% afwezig"]}/>;
+                    })}
                 </div>
             );
         }

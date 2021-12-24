@@ -7,22 +7,26 @@ const LineChart = (props) =>{
 
     var datasets = []
     var labels = [];
+    var Colors = [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)'
+    ];
 
-    console.log(props);
+    for(let i = 0; i < props.dataSet.data.length; i++){
 
-    for(let i = 0; i < props.dataSet.length; i++){
         datasets.push({
             label: props.dataSet.data[i].name,
             data: props.dataSet.courses[i],
-            borderColor: 'rgba(255, 99, 132, 1)',
-            backgroundColor: 'rgba(255, 99, 132, 1)',
+            borderColor: Colors[i],
+            backgroundColor: Colors[i],
         });
 
-        labels.push(props.dataSet.data[i].name);
+        labels.push(i);
     }
-
-    console.log(labels);
-    console.log(datasets);
 
     var data = {   
         labels: labels,
@@ -31,7 +35,8 @@ const LineChart = (props) =>{
     
     return(
         <div>
-            <Line data={data} />
+            <h3>aantal studenten te laat per les</h3>
+            <Line data={data} width={10} height={8}/>
         </div>
     );
 }

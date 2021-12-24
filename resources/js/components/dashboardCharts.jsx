@@ -13,6 +13,7 @@ class dashboardCharts extends React.Component {
             data: "",
             labels: ""
         },
+        lateData: []
     }
 
     async getChartData(){
@@ -54,7 +55,7 @@ class dashboardCharts extends React.Component {
         }
 
         this.setState({ dataSet: attendanceArray});
-                                    
+        this.setState({ lateData: {courses, data}});
     }
 
     componentDidMount(){
@@ -63,27 +64,32 @@ class dashboardCharts extends React.Component {
 
     render(){
 
-        const {dataSet} = this.state;
-
-        if(dataSet.data == ""){
+        const {lateData, dataSet} = this.state;
+        
+        if(dataSet.data == "" || lateData.data == undefined){
             return <h1>loading...</h1>
         }else{
             return (
-                <div className="List--courses">
-                    <List
-                        className="list--chart"
-                        pagination={{
-                            pageSize: 1,
-                        }}
-                        header={<h3 style={{margin: 0}} >Vakken</h3>}
-                        bordered
-                        dataSource={dataSet}
-                        renderItem={item => (
-                            <List.Item>
-                                <PieChart dataSet={item}/>
-                            </List.Item>
-                        )}
-                    />
+                <div className="container--charts">
+                    <div className="List--courses">
+                        <List
+                            className="list--chart"
+                            pagination={{
+                                pageSize: 1,
+                            }}
+                            header={<h3 style={{margin: 0}} >Vakken</h3>}
+                            bordered
+                            dataSource={dataSet}
+                            renderItem={item => (
+                                <List.Item>
+                                    <PieChart dataSet={item}/>
+                                </List.Item>
+                            )}
+                        />
+                    </div>
+                    <div className="chart">
+                        <LineChart dataSet={lateData}/>
+                    </div>
                 </div>
             );
         }

@@ -5,7 +5,7 @@ import { Pie } from 'react-chartjs-2'
 const PieChart = (props) =>{
 
     return(
-        <div>
+        <div className="chart--piechart">
             <h1>{props.dataSet[0]}</h1>
             <Pie 
                 data={{

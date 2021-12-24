@@ -25,7 +25,7 @@ const LineChart = (props) =>{
             backgroundColor: Colors[i],
         });
 
-        labels.push("less " + i);
+        labels.push("les " + i);
     }
 
     var data = {   
@@ -34,7 +34,7 @@ const LineChart = (props) =>{
     };
     
     return(
-        <div>
+        <div className="chart--linechart">
             <h3>% studenten te laat per les</h3>
             <Line data={data} width={10} height={8}/>
         </div>

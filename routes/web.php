@@ -45,6 +45,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('get-user-data', [ApiController::class, 'getUserData']);
     Route::post('student-has-lesson', [ScannerController::class, 'storeStudent']);
     Route::post('previous-courses', [LessonController::class, 'getDataLoggedInUser']);
+
+    Route::post('get-course-attendence', [StatisticsController::class, 'courseAttendence']);
+    Route::post('get-late-percentage', [StatisticsController::class, 'latePercentage']);
 });
 
 require __DIR__ . '/auth.php';

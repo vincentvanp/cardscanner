@@ -39,8 +39,8 @@ class StatisticsController extends Controller
     //Average attendance per course
     public function courseAttendence(Request $request)
     {
-
         $course = Course::where('id', $request['id'])->first();
+
         $totalStudents = 0;
         $attandingStudents = 0;
 
@@ -52,7 +52,7 @@ class StatisticsController extends Controller
 
         }
 
-        return json_encode(($attandingStudents/$totalStudents) * 100);
+        return json_encode(round(($attandingStudents/$totalStudents) * 100));
 
     }
 

@@ -16,20 +16,7 @@
 @import "organisms/form";
 @import "organisms/modal";
 @import "organisms/sidebar";
+@import "organisms/charts";
 @import "pages/home";
 @import "pages/ant";
 @import "pages/pages.scss";
-
-.chart{
-    width: 50%;
-    height: 45%;
-}
-
-.chart--piechart canvas{
-    height: 45vh !important;
-    width: 45vh !important;
-}
-
-.chart--linechart{
-    margin: 11vh 0 0 25px;
-}

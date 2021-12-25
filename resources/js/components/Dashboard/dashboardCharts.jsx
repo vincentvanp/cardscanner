@@ -1,8 +1,8 @@
 import React from "react";
 import { List } from 'antd';
 
-import BarChart from "../components/Charts/BarChart";
-import PieChart from "../components/Charts/PieChart";
+import BarChart from "./Charts/BarChart";
+import PieChart from "./Charts/PieChart";
 import LineChart from "./Charts/LineChart";
 
 const axios = require('axios').default;

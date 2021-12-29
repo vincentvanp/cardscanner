@@ -26,9 +26,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('oauth/login/{provider}', [oAuthController::class, 'redirectToProvider'])->name('oauth.login');
 Route::get('oauth/callback/{provider}', [oAuthController::class, 'handleProviderCallback'])->name('oauth.callback');
 
-Route::view('/login-admin', 'login')->where('login', '.*');
-
-Route::view('/{any}', 'dashboard')->where('any', '.*');
+//Route::view('/{any}', 'dashboard')->where('any', '.*');
 
 Route::group(['middleware' => ['auth']], function () {
     //only authorized users can access these routes

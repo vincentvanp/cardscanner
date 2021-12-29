@@ -1,15 +1,11 @@
 import ReactDOM from "react-dom";
 import React from "react";
 
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import 'antd/dist/antd.css';
 import '../sass/app.scss';
 
-import Sidebar from "./components/Sidebar";
-import MainContent from "./components/MainContent";
-import Home from "./components/home";
-import ActiveLesson from './components/ActiveLessonComponent';
 import { Layout } from 'antd';
 
 import MainRouter from "./router/MainRouter"

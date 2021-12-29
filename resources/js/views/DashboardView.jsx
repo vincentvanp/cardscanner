@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Layout } from 'antd';
 
-import ContentForm from '../components/ContentForm';
-import DashboardCharts from '../components/dashboardCharts';
+import ContentForm from '../components/Dashboard/ContentForm';
+import DashboardCharts from '../components/Dashboard/dashboardCharts';
 
 
 class DashboardView extends React.Component {

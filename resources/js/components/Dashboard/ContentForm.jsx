@@ -1,9 +1,7 @@
 import { Form, Modal, Button, Select } from 'antd';
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
 
 import { ClockCircleOutlined } from '@ant-design/icons';
-import { valuesIn } from 'lodash';
 
 const { Option } = Select;
 
@@ -99,8 +97,8 @@ class ContentForm extends React.Component{
                     width={1000}
                     footer={[
                     ]}>
-                    <Form {...this.layout} form={this.form} onFinish={this.onFinish} name="control-hooks" className="Form--Start-les">
-                        <Form.Item name="course_id" label="course_id" rules={[{ required: true }]}>
+                    <Form {...this.layout} form={this.form} onFinish={this.onFinish} name="control-hooks" className="Form--Start-les" layout="vertical" requiredMark={false}>
+                        <Form.Item name="course_id" label="Course" rules={[{ required: true }]}>
                             <Select
                                 className="select--lesson-form"
                                 placeholder="Selecteer een vak"
@@ -113,7 +111,7 @@ class ContentForm extends React.Component{
                             </Select>
                         </Form.Item>
 
-                        <Form.Item name="lesson_id" label="lesson_id" rules={[{ required: true }]}>
+                        <Form.Item name="lesson_id" label="Lesson" rules={[{ required: true }]}>
                             <Select
                                 className="select--lesson-form"
                                 placeholder="Selecteer een les"

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Sidebar from '../components/Sidebar';
+import Sidebar from '../components/layoutComponents/Sidebar';
 import { Layout, PageHeader } from 'antd';
 
 import ScannerHeader from '../components/layoutComponents/header';

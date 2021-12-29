@@ -26,9 +26,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('oauth/login/{provider}', [oAuthController::class, 'redirectToProvider'])->name('oauth.login');
 Route::get('oauth/callback/{provider}', [oAuthController::class, 'handleProviderCallback'])->name('oauth.callback');
 
-Route::view('/login-admin', 'login')->where('login', '.*');
-
-Route::view('/{any}', 'dashboard')->where('any', '.*');
+//Route::view('/{any}', 'dashboard')->where('any', '.*');
 
 Route::group(['middleware' => ['auth']], function () {
     //only authorized users can access these routes
@@ -45,6 +43,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('get-user-data', [ApiController::class, 'getUserData']);
     Route::post('student-has-lesson', [ScannerController::class, 'storeStudent']);
     Route::post('previous-courses', [LessonController::class, 'getDataLoggedInUser']);
+
+    Route::post('get-course-attendence', [StatisticsController::class, 'courseAttendence']);
+    Route::post('get-late-percentage', [StatisticsController::class, 'latePercentage']);
 });
 
 require __DIR__ . '/auth.php';

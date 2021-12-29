@@ -44,6 +44,6 @@ class populateUserTable implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return Auth::user()->id;
+        return strval(Auth::user()->id);
     }
 }

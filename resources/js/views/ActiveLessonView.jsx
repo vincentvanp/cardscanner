@@ -12,10 +12,25 @@ var channel = pusher.subscribe('scanner-channel');
 
 channel.bind(sessionStorage.getItem("scanner"), function (data) {
 
-    axios.post('/student-has-lesson', {
-        'serial': data,
-        'lesson_id': sessionStorage.getItem("lesson_id")
-    });
+    if(data.message != undefined && data.message != "scanner starting up!!!"){
+        axios.post('/student-has-lesson', {
+            'serial': data.message,
+            'lesson_id': sessionStorage.getItem("lesson_id")
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+        .then(function (res) {
+            console.log(res);
+        });
+    }else if(data.message == "scanner starting up!!!"){
+        console.log(data.message);
+    }else{
+        axios.post('/student-has-lesson', {
+            'serial': data,
+            'lesson_id': sessionStorage.getItem("lesson_id")
+        });
+    }
 });
 
 class ActiveLessonView extends React.Component {

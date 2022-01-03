@@ -5,6 +5,7 @@ import {
 
 import { Button, Layout, Menu } from 'antd';
 import { HomeFilled, LaptopOutlined } from '@ant-design/icons';
+import axios from 'axios';
 
 const { Sider } = Layout;
 
@@ -25,6 +26,12 @@ class Sidebar extends React.Component{
 
     componentDidMount(){
         this.GetUserData();
+    }
+
+    handleLogout(){
+
+        axios.post("/logout");
+        window.location.href = "/login";
     }
 
     render() {
@@ -59,7 +66,7 @@ class Sidebar extends React.Component{
                                     {/* <a href=""><p className="link">profiel bekijken</p></a> */}
                                 </div>
                             </div>
-                            <Button className="button--logout">Uitloggen</Button>
+                            <Button  onClick={this.handleLogout} className="button--logout">Uitloggen</Button>
                         </div>
                     </Menu>
                 </Sider>
@@ -86,7 +93,7 @@ class Sidebar extends React.Component{
                                     <a href=""><p className="link">profiel bekijken</p></a>
                                 </div>
                             </div>
-                            <Button className="button--logout">Uitloggen</Button>
+                            <Button className="button--logout" onClick={this.handleLogout}>Uitloggen</Button>
                         </div>
                     </Menu>
                 </Sider>

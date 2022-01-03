@@ -102,7 +102,7 @@ class ActiveLessonView extends React.Component {
             addVisible: false,
         });
 
-        axios.post('/add-student-by-name', {
+        axios.post('/student-has-lesson', {
             'name': values.name,
             'lesson_id': sessionStorage.getItem("lesson_id")
         });

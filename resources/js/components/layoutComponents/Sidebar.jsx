@@ -20,6 +20,10 @@ class Sidebar extends React.Component{
         .then(function(response){
             return response.data;
         }).catch(e => console.log(e));
+
+        if(data == undefined){
+            window.location.href = "/login";
+        }
         
         this.setState({ user: data});
     }
@@ -52,7 +56,7 @@ class Sidebar extends React.Component{
                         defaultOpenKeys={['sub1']}
                         style={{ height: '100%', borderRight: 0 }}>
                         <div className="container--logo"><img className="logo" src="../../images/kdg.png" /></div>
-                        <Menu.Item key="1"><HomeFilled /><Link to="/dashboard">Dashboard</Link></Menu.Item>
+                        <Menu.Item key="1"><HomeFilled /><Link to="/">Dashboard</Link></Menu.Item>
                         <Menu.Item key="2"><LaptopOutlined /><Link to="/previous-lessons">Vorige lessen</Link></Menu.Item>
                         <div className="sidebar--bottom">
                             <div className="user">
@@ -82,7 +86,7 @@ class Sidebar extends React.Component{
                         defaultOpenKeys={['sub1']}
                         style={{ height: '100%', borderRight: 0 }}>
                         <div className="container--logo"><img className="logo" src="../../images/kdg.png" /></div>
-                        <Menu.Item key="1"><HomeFilled /><Link to="/dashboard">Dashboard</Link></Menu.Item>
+                        <Menu.Item key="1"><HomeFilled /><Link to="/">Dashboard</Link></Menu.Item>
                         <Menu.Item key="2"><LaptopOutlined /><Link to="/previous-lessons">Vorige lessen</Link></Menu.Item>
                         <div className="sidebar--bottom">
                             <div className="user">

@@ -3,7 +3,7 @@ import React from 'react';
 
 import LessonCard from './LessonCard';
 
-import { Space, Spin } from 'antd';
+import { Space, Spin, Skeleton, Card } from 'antd';
 
 class PreviousLessons extends React.Component {
     state = {
@@ -48,7 +48,28 @@ class PreviousLessons extends React.Component {
                 </div>
             );
         }else{
-            return <Spin/>
+            return (
+                <div>
+                    <Spin/>
+                    <div className="container--card">
+                        <Space wrap>
+                            <Card className="card">
+                                <Skeleton/>
+                            </Card>
+                            <Card className="card">
+                                <Skeleton/>
+                            </Card>
+                            <Card className="card">
+                                <Skeleton/>
+                            </Card>
+                            <Card className="card">
+                                <Skeleton/>
+                            </Card>
+                        </Space>
+                        
+                    </div>
+                </div>
+            );
         }
     }
 }

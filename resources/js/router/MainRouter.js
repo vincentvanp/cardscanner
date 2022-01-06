@@ -40,10 +40,6 @@ const MainRouter = () => {
             </Route>
 
             <Route path='*' element={<Navigate replace to="/" />} />
-
-            {/* <Route exact path='/lessons' element={<MainContent />} />
-            <Route exact path='/lesson-board' element={<ActiveLesson />} />
-            <Route path="/" element={<Home />} /> */}
         </Routes>
     );
 };

@@ -3,7 +3,7 @@ import React from 'react';
 
 import LessonCard from './LessonCard';
 
-import { Space } from 'antd';
+import { Space, Spin } from 'antd';
 
 class PreviousLessons extends React.Component {
     state = {
@@ -48,7 +48,7 @@ class PreviousLessons extends React.Component {
                 </div>
             );
         }else{
-            return <h1>loading...</h1>
+            return <Spin/>
         }
     }
 }

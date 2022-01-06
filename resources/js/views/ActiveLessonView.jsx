@@ -111,7 +111,6 @@ class ActiveLessonView extends React.Component {
     render() {
 
         const {lesson} = this.state;
-
         
         if(lesson.event == "none"){
             return(

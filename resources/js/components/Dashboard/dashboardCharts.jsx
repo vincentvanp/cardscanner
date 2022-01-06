@@ -1,5 +1,5 @@
 import React from "react";
-import { List } from 'antd';
+import { List, Spin } from 'antd';
 
 import BarChart from "./Charts/BarChart";
 import PieChart from "./Charts/PieChart";
@@ -67,7 +67,7 @@ class dashboardCharts extends React.Component {
         const {lateData, dataSet} = this.state;
         
         if(dataSet.data == "" || lateData.data == undefined){
-            return <h1>loading...</h1>
+            return <Spin/>
         }else{
             return (
                 <div className="container--charts">

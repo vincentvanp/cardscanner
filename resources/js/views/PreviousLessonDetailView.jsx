@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import PreviousDetail from "../components/previousDetail"
+import PreviousDetail from "../components/previousLessons/previousDetail"
 import { Layout } from 'antd';
 
 function PreviousLessonDetailView(){

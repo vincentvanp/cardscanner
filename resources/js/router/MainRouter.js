@@ -33,8 +33,8 @@ const MainRouter = () => {
             <Route exact path="/login" element={<LoginView />} />
 
             <Route path="/" element={<Private />} >
-                <Route path="active-lesson" element={<LayoutView Component={<ActiveLessonView />} />} />
                 <Route path="/" element={<LayoutView Component={<DashboardView />} />} />
+                <Route path="active-lesson" element={<LayoutView Component={<ActiveLessonView />} />} />
                 <Route path="previous-lessons" element={<LayoutView Component={<PreviousLessonsView />} />} />
                 <Route path="previous-lessons/:lessonId" element={<LayoutView Component={<PreviousLessonDetailView />} />} />
             </Route>

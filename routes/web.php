@@ -39,7 +39,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('get-absent-students', [StudentController::class, 'getAbsentStudents']);
     Route::post('get-student', [StudentController::class, 'getAbsentStudents']);
     Route::post('get-lesson-by-course', [LessonController::class, 'getUnstartedLessonsByCourse']);
-    //Route::get('absentStudents/{lesson_id}', [lessonController::class, 'getAbsentStudents']);
     Route::post('get-user-data', [ApiController::class, 'getUserData']);
     Route::post('student-has-lesson', [ScannerController::class, 'storeStudent']);
     Route::post('add-student-by-name', [ScannerController::class, 'storeStudentByName']);

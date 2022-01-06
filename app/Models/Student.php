@@ -21,12 +21,15 @@ class Student extends Model
 
     public function lessons()
     {
-        return $this->belongsToMany(Lesson::class, 'student_has_lesson', 'student_id')->withPivot('present')->withTimeStamps();
+        return $this->belongsToMany(Lesson::class, 'student_has_lesson', 'student_id')
+                    ->withPivot('present')
+                    ->withTimeStamps();
     }
 
     public function attendedLessons()
     {
-        return $this->belongsToMany(Lesson::class, 'student_has_lesson', 'student_id')->wherePivot('present', 1);
+        return $this->belongsToMany(Lesson::class, 'student_has_lesson', 'student_id')
+                    ->wherePivot('present', 1);
     }
     
 }

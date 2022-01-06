@@ -28,6 +28,12 @@ class oAuthController extends Controller
         $providerUser = $this->socialiteProvider($provider)->user();
 
         //$user = User::firstOrNew(['provider_id' => $providerUser->getId()]);
+
+        if (str_contains($providerUser->getEmail(),'@student.kdg.be') && !str_contains('rickert.goyvaerts') && !str_contains('cedric.lenders') && !str_contains('vincent.vanpuymbroeck')) 
+        {
+            redirect('/login')->with('teacher', 'false');
+        }
+
         $user = User::firstOrNew(['email' => $providerUser->getEmail()]);
 
         $user->name = $providerUser->getName();

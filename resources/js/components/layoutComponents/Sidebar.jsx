@@ -5,6 +5,7 @@ import {
 
 import { Button, Layout, Menu } from 'antd';
 import { HomeFilled, LaptopOutlined } from '@ant-design/icons';
+import axios from 'axios';
 
 const { Sider } = Layout;
 
@@ -19,12 +20,22 @@ class Sidebar extends React.Component{
         .then(function(response){
             return response.data;
         }).catch(e => console.log(e));
+
+        if(data == undefined){
+            window.location.href = "/login";
+        }
         
         this.setState({ user: data});
     }
 
     componentDidMount(){
         this.GetUserData();
+    }
+
+    handleLogout(){
+
+        axios.post("/logout");
+        window.location.href = "/login";
     }
 
     render() {
@@ -45,7 +56,7 @@ class Sidebar extends React.Component{
                         defaultOpenKeys={['sub1']}
                         style={{ height: '100%', borderRight: 0 }}>
                         <div className="container--logo"><img className="logo" src="../../images/kdg.png" /></div>
-                        <Menu.Item key="1"><HomeFilled /><Link to="/dashboard">Dashboard</Link></Menu.Item>
+                        <Menu.Item key="1"><HomeFilled /><Link to="/">Dashboard</Link></Menu.Item>
                         <Menu.Item key="2"><LaptopOutlined /><Link to="/previous-lessons">Vorige lessen</Link></Menu.Item>
                         <div className="sidebar--bottom">
                             <div className="user">
@@ -59,7 +70,7 @@ class Sidebar extends React.Component{
                                     {/* <a href=""><p className="link">profiel bekijken</p></a> */}
                                 </div>
                             </div>
-                            <Button className="button--logout">Uitloggen</Button>
+                            <Button  onClick={this.handleLogout} className="button--logout">Uitloggen</Button>
                         </div>
                     </Menu>
                 </Sider>
@@ -75,7 +86,7 @@ class Sidebar extends React.Component{
                         defaultOpenKeys={['sub1']}
                         style={{ height: '100%', borderRight: 0 }}>
                         <div className="container--logo"><img className="logo" src="../../images/kdg.png" /></div>
-                        <Menu.Item key="1"><HomeFilled /><Link to="/dashboard">Dashboard</Link></Menu.Item>
+                        <Menu.Item key="1"><HomeFilled /><Link to="/">Dashboard</Link></Menu.Item>
                         <Menu.Item key="2"><LaptopOutlined /><Link to="/previous-lessons">Vorige lessen</Link></Menu.Item>
                         <div className="sidebar--bottom">
                             <div className="user">
@@ -86,7 +97,7 @@ class Sidebar extends React.Component{
                                     <a href=""><p className="link">profiel bekijken</p></a>
                                 </div>
                             </div>
-                            <Button className="button--logout">Uitloggen</Button>
+                            <Button className="button--logout" onClick={this.handleLogout}>Uitloggen</Button>
                         </div>
                     </Menu>
                 </Sider>

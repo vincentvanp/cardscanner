@@ -34,12 +34,12 @@ const MainRouter = () => {
 
             <Route path="/" element={<Private />} >
                 <Route path="active-lesson" element={<LayoutView Component={<ActiveLessonView />} />} />
-                <Route path="dashboard" element={<LayoutView Component={<DashboardView />} />} />
+                <Route path="/" element={<LayoutView Component={<DashboardView />} />} />
                 <Route path="previous-lessons" element={<LayoutView Component={<PreviousLessonsView />} />} />
                 <Route path="previous-lessons/:lessonId" element={<LayoutView Component={<PreviousLessonDetailView />} />} />
             </Route>
 
-            <Route path='*' element={<Navigate replace to="/dashboard" />} />
+            <Route path='*' element={<Navigate replace to="/" />} />
 
             {/* <Route exact path='/lessons' element={<MainContent />} />
             <Route exact path='/lesson-board' element={<ActiveLesson />} />

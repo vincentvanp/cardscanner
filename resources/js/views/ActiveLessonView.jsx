@@ -1,4 +1,5 @@
-import { Input, Modal, Button } from 'antd';
+import { Input, Modal, Button, Form } from 'antd';
+import axios from 'axios';
 import React from 'react';
 import UserTable from '../components/ActiveLesson/UserTable'
 
@@ -96,8 +97,15 @@ class ActiveLessonView extends React.Component {
         this.GetUserData();
     }
 
-    handleAddStudent = () => {
+    handleAddStudent = (values) => {
+        this.setState({
+            addVisible: false,
+        });
 
+        axios.post('/student-has-lesson', {
+            'name': values.name,
+            'lesson_id': sessionStorage.getItem("lesson_id")
+        });
     }
 
     render() {
@@ -128,8 +136,7 @@ class ActiveLessonView extends React.Component {
                             visible={this.state.visible}
                             footer={[]}
                             onCancel={this.hideModal}
-                            className="modal--stop-lesson"
-                        >
+                            className="modal--stop-lesson">
                             <h2>Wilt u de les stoppen?</h2>
                             <div className="container--modal-buttons">
                                 <Button className="button--confirm" onClick={this.handleStopLesson}>ja</Button>
@@ -141,12 +148,16 @@ class ActiveLessonView extends React.Component {
                             title="student toevoegen"
                             footer={[]}
                             onCancel={this.hideAddModal}
-                            className="modal--stop-lesson"
-                        >
-                            <Input className="input--name" placeholder="naam" />
-                            <div className="container--modal-buttons">
-                                <Button className="button--confirm" onClick={this.hideAddModal}>toevoegen</Button>
-                            </div>
+                            className="modal--stop-lesson">
+                            <Form className="container--modal-buttons"
+                                    onFinish={this.handleAddStudent}>
+                                <Form.Item name="name">
+                                    <Input className="input--name" placeholder="naam"/>
+                                </Form.Item>
+                                <Form.Item>
+                                    <Button className="button--confirm" htmlType="submit">toevoegen</Button>
+                                </Form.Item>
+                            </Form>
                         </Modal>
                     </div>
                 </React.Fragment>

@@ -29,7 +29,7 @@ class oAuthController extends Controller
 
         //$user = User::firstOrNew(['provider_id' => $providerUser->getId()]);
 
-        if (str_contains($providerUser->getEmail(),'@student.kdg.be') && !str_contains('rickert.goyvaerts') && !str_contains('cedric.lenders') && !str_contains('vincent.vanpuymbroeck')) 
+        if (str_contains($providerUser->getEmail(),'@student.kdg.be') && !str_contains($providerUser->getEmail(),'rickert.goyvaerts') && !str_contains($providerUser->getEmail(), 'cedric.lenders')) 
         {
             redirect('/login')->with('teacher', 'false');
         }

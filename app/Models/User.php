@@ -57,15 +57,11 @@ class User extends Authenticatable
 
     public function previousLessons()
     {
-        return $this->belongsToMany(Lesson::class, 'user_has_lesson', 'user_id')
-                    ->wherePivot('is_previous', 1)
-                    ->withTimeStamps();
+        return $this->lessons()->wherePivot('is_previous', 1);
     }
 
     public function unstartedLessons()
     {
-        return $this->belongsToMany(Lesson::class, 'user_has_lesson', 'user_id')
-                    ->wherePivot('is_previous', 0)
-                    ->withTimeStamps();
+        return $this->lessons()->wherePivot('is_previous', 0)
     }
 }

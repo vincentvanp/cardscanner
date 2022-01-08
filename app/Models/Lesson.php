@@ -28,8 +28,12 @@ class Lesson extends Model
     
     public function users() 
     {
-        return $this->belongsToMany(User::class, 'user_has_lesson', 'lesson_id') 
-                    ->withPivot('is_previous')->withTimeStamps();
+        return $this->belongsToMany(User::class, 'user_has_lesson', 'lesson_id');
+    }
+
+    public function getUsers() 
+    {
+        return $this->users()->withPivot('is_previous')->withTimeStamps();
     }
     
 
@@ -43,18 +47,14 @@ class Lesson extends Model
         return $this->students()->withPivot('present')->withTimeStamps();
     }
 
-    public function abscentStudents() 
+    public function abscentStudents()
     {
-        return $this->belongsToMany(Student::class, 'student_has_lesson', 'lesson_id')
-                    ->wherePivot('present', 0)
-                    ->withTimeStamps();
+        return $this->getStudents()->wherePivot('present', 0);
     }
 
     public function presentStudents() 
     {
-        return $this->belongsToMany(Student::class, 'student_has_lesson', 'lesson_id')
-                    ->wherePivot('present', 1)
-                    ->withTimeStamps();
+        return $this->getStudents()->wherePivot('present', 1);
     }
 
     public function courses()

@@ -28,8 +28,7 @@ class Student extends Model
 
     public function attendedLessons()
     {
-        return $this->belongsToMany(Lesson::class, 'student_has_lesson', 'student_id')
-                    ->wherePivot('present', 1);
+        return $this->lessons()->wherePivot('present', 1);
     }
     
 }

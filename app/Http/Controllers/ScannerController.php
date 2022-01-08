@@ -44,11 +44,13 @@ class ScannerController extends Controller
         $attendedLessons = $student->attendedLessons;
 
         //Change present to true by checking if studenthaslesson already exists
-        if($student->lessons->contains($lesson)){
+        if($student->lessons->contains($lesson))
+        {
             $student->lessons()->updateExistingPivot($lesson,['present' => 1]);
         }
 
-        else{
+        else
+        {
             $student->lessons()->attach($lesson,['present' => 1]);
         }
 

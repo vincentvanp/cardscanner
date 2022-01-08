@@ -28,7 +28,8 @@ class Lesson extends Model
     
     public function users() 
     {
-        return $this->belongsToMany(User::class, 'user_has_lesson', 'lesson_id') ->withPivot('is_previous')->withTimeStamps();
+        return $this->belongsToMany(User::class, 'user_has_lesson', 'lesson_id') 
+                    ->withPivot('is_previous')->withTimeStamps();
     }
     
 

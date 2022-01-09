@@ -62,6 +62,6 @@ class User extends Authenticatable
 
     public function unstartedLessons()
     {
-        return $this->lessons()->wherePivot('is_previous', 0)
+        return $this->lessons()->wherePivot('is_previous', 0);
     }
 }

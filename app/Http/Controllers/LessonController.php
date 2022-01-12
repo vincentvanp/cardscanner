@@ -43,5 +43,21 @@ class LessonController extends Controller
         return $user->unstartedLessons->where('course_id', $request['course_id'])->toJson();
     }
 
-    
+    public function createLesson(Request $request){
+        
+        $course_id = Course::where("name" , $request->course)->select("id")->first();
+        $user = Auth::user();
+
+        $lesson = new Lesson;
+
+        $lesson->name = $request->name;
+        $lesson->course_id =  $course_id->id;
+        $lesson->start = $request->date . " " . $request->start;
+        $lesson->end = $request->date . " " . $request->end;
+        $lesson->save();
+        
+        $user->lessons()->attach($lesson, ["is_previous" => 0]);
+        
+        return ['status' => 'OK'];
+    }
 }

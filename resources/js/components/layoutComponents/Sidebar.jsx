@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 
 import { Button, Layout, Menu } from 'antd';
-import { HomeFilled, LaptopOutlined } from '@ant-design/icons';
+import { HomeFilled, LaptopOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import axios from 'axios';
 
 const { Sider } = Layout;
@@ -58,6 +58,7 @@ class Sidebar extends React.Component{
                         <div className="container--logo"><img className="logo" src="../../images/kdg.png" /></div>
                         <Menu.Item key="1"><HomeFilled /><Link to="/">Dashboard</Link></Menu.Item>
                         <Menu.Item key="2"><LaptopOutlined /><Link to="/previous-lessons">Vorige lessen</Link></Menu.Item>
+                        <Menu.Item key="3"><PlusSquareOutlined /><Link to="/add">les aanmaken</Link></Menu.Item>
                         <div className="sidebar--bottom">
                             <div className="user">
                                 <div className="avatar">

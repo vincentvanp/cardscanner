@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('get-scanners', [ScannerController::class, 'getScanners']);
     Route::post('get-lessons', [LessonController::class, 'getUnstartedLessons']);
     Route::post('get-courses', [CourseController::class, 'getUserCourses']);
+    Route::post('get-all-courses', [CourseController::class, 'getAllCourses']);
     Route::post('get-attending-students', [StudentController::class, 'getAttendingStudents']);
     Route::post('get-absent-students', [StudentController::class, 'getAbsentStudents']);
     Route::post('get-student', [StudentController::class, 'getAbsentStudents']);
@@ -44,6 +45,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('student-has-lesson', [ScannerController::class, 'storeStudent']);
     Route::post('add-student-by-name', [ScannerController::class, 'storeStudentByName']);
     Route::post('previous-courses', [LessonController::class, 'getDataLoggedInUser']);
+    Route::post('create-lesson', [LessonController::class, 'createLesson']);
+
 
     Route::post('get-course-attendence', [StatisticsController::class, 'courseAttendence']);
     Route::post('get-late-percentage', [StatisticsController::class, 'latePercentage']);

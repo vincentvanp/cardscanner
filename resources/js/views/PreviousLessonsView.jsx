@@ -3,7 +3,7 @@ import { Layout, Select } from 'antd';
 
 const { Option } = Select;
 
-import PreviousLessons from '../components/previousLessons';
+import PreviousLessons from '../components/previousLessons/previousLessons';
 
 class PreviousLessonsView extends React.Component {
     

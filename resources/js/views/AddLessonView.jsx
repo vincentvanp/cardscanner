@@ -74,7 +74,7 @@ class AddLessonView extends React.Component{
                             ))}
                             </Checkbox.Group>
                         </div> */}
-                    <h1 className='text--page-title'>less aanmaken</h1>
+                    <h1 className='text--page-title form--header'>less aanmaken</h1>
                     <div className='container--add-lesson bg--dark'>
                         <Form className='form--add-lesson' {...this.layout} onFinish={this.onFinish}>
                             <Form.Item

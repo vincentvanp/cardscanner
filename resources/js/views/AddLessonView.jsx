@@ -67,16 +67,16 @@ class AddLessonView extends React.Component{
         if(courses != ""){
             return(
                 <div>
-                    <div style={{background: "black"}}>
+                    {/* <div className='form--checkbox-group'>
                         <Checkbox.Group onChange={this.CheckChange}>
-                            {courses.map((course) => (
-                                <Checkbox value={course.name}>{course.name}</Checkbox>
+                        {courses.map((course) => (
+                            <Checkbox value={course.name}>{course.name}</Checkbox>
                             ))}
-                        </Checkbox.Group>
-                    </div>
-
-                    <div style={{background: "black"}}>
-                        <Form {...this.layout} onFinish={this.onFinish}>
+                            </Checkbox.Group>
+                        </div> */}
+                    <h1 className='text--page-title'>less aanmaken</h1>
+                    <div className='container--add-lesson bg--dark'>
+                        <Form className='form--add-lesson' {...this.layout} onFinish={this.onFinish}>
                             <Form.Item
                                 label="vak"
                                 name="course"
@@ -86,8 +86,8 @@ class AddLessonView extends React.Component{
                                     placeholder="Vak"
                                     style={{ width: 200 }}
                                     allowClear>
-                                    {checkedCourses.map((course) => (
-                                        <Option value={course}>{course}</Option>
+                                    {courses.map((course) => (
+                                        <Option key={course.id} value={course.name}>{course.name}</Option>
                                     ))}
                                 </Select>
                             </Form.Item>
@@ -101,7 +101,7 @@ class AddLessonView extends React.Component{
                                 <RangePicker format="HH:mm" minuteStep={15} onChange={this.timeChange}/>
                             </Form.Item>
                             <Form.Item>
-                                <Button type="primary" htmlType="submit">
+                                <Button className='button--lesson-form' type="primary" htmlType="submit">
                                     Submit
                                 </Button>
                             </Form.Item>

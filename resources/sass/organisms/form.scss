@@ -3,6 +3,21 @@ label{
     font-size: 20px !important;
 }
 
-.ant-col {
-    width: 200% !important;
+.form--add-lesson{
+    background-color: #262626;
+    display: flex !important;
+    align-items: flex-start;
+    justify-content: start;
+    flex-direction: column;
+    padding: 20px !important;
+
+    .ant-form-item{
+        width: 25vw;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.form--checkbox-group{
+    height: 50%;
 }

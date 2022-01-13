@@ -20,6 +20,11 @@ class StatisticsController extends Controller
 
         $students = $lesson->getStudents;
 
+        if(count($students) == 0)
+        {
+            return 0;
+        }
+
         foreach($students as $student)
         {
 
@@ -50,6 +55,10 @@ class StatisticsController extends Controller
             $totalStudents += count($lesson->students);
             $attandingStudents += count($lesson->presentStudents);
 
+        }
+
+        if($totalStudents == 0){
+            return 0;
         }
 
         return json_encode(round(($attandingStudents/$totalStudents) * 100));

@@ -1,16 +1,18 @@
 import React from 'react';
 import {
-    Link
+    Link,
+    useHistory
 } from 'react-router-dom';
 
 import { Button, Layout, Menu } from 'antd';
 import { HomeFilled, LaptopOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { valuesIn } from 'lodash';
 
 const { Sider } = Layout;
 
 class Sidebar extends React.Component{
-
+    
     state = {
         user: ''
     }
@@ -32,6 +34,10 @@ class Sidebar extends React.Component{
         this.GetUserData();
     }
 
+    onchange = (values) =>{
+        sessionStorage.setItem("selected", values.key);
+    }
+
     handleLogout(){
 
         axios.post("/logout");
@@ -41,6 +47,8 @@ class Sidebar extends React.Component{
     render() {
 
         const {user} = this.state;
+
+        console.log(sessionStorage.getItem("selected"));
 
         if(user.name != undefined){
 
@@ -52,13 +60,13 @@ class Sidebar extends React.Component{
                         className="sidebar"
                         mode="inline"
                         theme="dark"
-                        defaultSelectedKeys={['1']}
-                        defaultOpenKeys={['sub1']}
+                        onSelect={this.onchange}
+                        selectedKeys={sessionStorage.getItem("selected")}
                         style={{ height: '100%', borderRight: 0 }}>
                         <div className="container--logo"><img className="logo" src="../../images/kdg.png" /></div>
-                        <Menu.Item key="1"><HomeFilled /><Link to="/">Dashboard</Link></Menu.Item>
-                        <Menu.Item key="2"><LaptopOutlined /><Link to="/previous-lessons">Vorige lessen</Link></Menu.Item>
-                        <Menu.Item key="3"><PlusSquareOutlined /><Link to="/add">les aanmaken</Link></Menu.Item>
+                        <Menu.Item key="1"><Link to="/"><HomeFilled /></Link>Dashboard</Menu.Item>
+                        <Menu.Item key="2"><Link to="/previous-lessons"><LaptopOutlined /></Link>Vorige lessen</Menu.Item>
+                        <Menu.Item key="3"><Link to="/add"><PlusSquareOutlined /></Link>les aanmaken</Menu.Item>
                         <div className="sidebar--bottom">
                             <div className="user">
                                 <div className="avatar">
@@ -71,7 +79,7 @@ class Sidebar extends React.Component{
                                     {/* <a href=""><p className="link">profiel bekijken</p></a> */}
                                 </div>
                             </div>
-                            <Button  onClick={this.handleLogout} className="button--logout">Uitloggen</Button>
+                            <Button onClick={this.handleLogout} className="button--logout">Uitloggen</Button>
                         </div>
                     </Menu>
                 </Sider>

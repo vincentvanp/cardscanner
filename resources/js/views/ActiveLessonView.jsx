@@ -37,6 +37,8 @@ channel.bind(sessionStorage.getItem("scanner"), function (data) {
 
 class ActiveLessonView extends React.Component {
 
+    formRef = React.createRef();
+
     state = { visible: false , addVisible: false};
 
     showAddModal = () => {
@@ -46,6 +48,8 @@ class ActiveLessonView extends React.Component {
     };
 
     hideAddModal = () => {
+        this.formRef.current.resetFields();
+
         this.setState({
             addVisible: false,
         });
@@ -106,6 +110,9 @@ class ActiveLessonView extends React.Component {
     }
 
     handleAddStudent = (values) => {
+
+        this.formRef.current.resetFields();
+        
         this.setState({
             addVisible: false,
         });
@@ -156,7 +163,7 @@ class ActiveLessonView extends React.Component {
                             footer={[]}
                             onCancel={this.hideAddModal}
                             className="modal--stop-lesson">
-                            <Form className="container--modal-buttons"
+                            <Form ref={this.formRef} className="container--modal-buttons"
                                     onFinish={this.handleAddStudent}>
                                 <Form.Item name="name">
                                     <Select

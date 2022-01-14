@@ -37,25 +37,19 @@ class ScannerController extends Controller
             return ['status' => 'ERROR'];
         }
 
-        
         $lesson = Lesson::where('id', $request["lesson_id"])->first();
         $user = Auth::user();
-
+        
         $attendedLessons = $student->attendedLessons;
+        
 
         //Change present to true by checking if studenthaslesson already exists
         if($student->lessons->contains($lesson))
         {
             $student->lessons()->updateExistingPivot($lesson,['present' => 1]);
-        }
-
-        else
+        }else
         {
             $student->lessons()->attach($lesson,['present' => 1]);
-        }
-
-        if($student->lessons()->where('lessons.id', $lesson->id)->first()->pivot->present == 1)
-        {
             $time = Carbon::parse($student->lessons()->first()->pivot->updated_at)->format('H:i');
             event(new populateUserTable($student->name, $request["serial"], $time));
         }
@@ -63,8 +57,9 @@ class ScannerController extends Controller
         
         $user->scancount += 1;
         $user->save();
-            
+        
         return ['status' => 'OK'];
+        
     }
 
 }

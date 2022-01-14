@@ -36,4 +36,11 @@ class StudentController extends Controller
 
         return $students->toJson();
     }
+
+    public function getAllStudents(){
+        
+        $students = DB::table("students")->get();
+        
+        return $students;
+    }
 }

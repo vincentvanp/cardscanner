@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('oauth/login/{provider}', [oAuthController::class, 'redirectToProvider'])->name('oauth.login');
 Route::get('oauth/callback/{provider}', [oAuthController::class, 'handleProviderCallback'])->name('oauth.callback');
+Route::get('teststuff', [ScannerController::class, 'test']);
 
 Route::view('/{any}', 'dashboard')->where('any', '.*');
 

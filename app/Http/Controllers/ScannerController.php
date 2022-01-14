@@ -54,9 +54,12 @@ class ScannerController extends Controller
             $student->lessons()->attach($lesson,['present' => 1]);
         }
 
-        $time = Carbon::parse($student->lessons()->first()->pivot->updated_at)->format('H:i');
-
-        event(new populateUserTable($student->name, $request["serial"], $time));
+        if($student->lessons()->where('lessons.id', $lesson->id)->first()->pivot->present == 1)
+        {
+            $time = Carbon::parse($student->lessons()->first()->pivot->updated_at)->format('H:i');
+            event(new populateUserTable($student->name, $request["serial"], $time));
+        }
+        
         
         $user->scancount += 1;
         $user->save();

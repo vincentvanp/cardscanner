@@ -37,7 +37,7 @@ class PreviousLessons extends React.Component {
             const course = this.props.course;
 
             if(length > 6){
-                var displayLessons = lessons.slice((length-1)*(page-1), (length*(page-1)+6));
+                var displayLessons = lessons.slice((length-1)*(page-1), (length*(page-1)+lessonsPerPage));
 
                 return(
                     <div className="container--card">

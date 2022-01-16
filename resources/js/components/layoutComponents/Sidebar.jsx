@@ -84,7 +84,7 @@ class Sidebar extends React.Component{
             );
         }else{
             return (
-                <Sider width={250}>
+                <Sider width={250} className='sidebar'>
                     <div className="container--logo"><img className="logo" src="../../images/kdg.png" /></div>
                     <Menu
                         className="sidebar"

@@ -2,7 +2,11 @@
     background-color: #201F1F !important;
     width: 250px !important;
     position: relative !important;
-    height: 100vh !important;
+    height: 100vh;
+}
+
+.sidebar--menu{
+    background-color: #201F1F !important;
 }
 
 .sidebar--bottom{

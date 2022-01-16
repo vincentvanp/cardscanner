@@ -32,6 +32,14 @@ class PreviousLessonCard extends React.Component{
         var studentsPresent = present_students.length;
         var totalStudents = present_students.length + absent_students.length;
 
+        var percentage = 0;
+
+        if(totalStudents == 0){
+            percentage = "niemand aanweezig";
+        }else{
+            percentage = Math.round(studentsPresent/totalStudents*100) + " " + "% was aanwezig";
+        }
+
         if(loaded){
             return(
                 <Card className="card">
@@ -39,7 +47,7 @@ class PreviousLessonCard extends React.Component{
                         <h3>{this.props.lesson.name}</h3>
                         <p className="card--text text--label">aanwezigheden:</p>
                         <p className="card--text card--text-atended">{studentsPresent}/{totalStudents} leerlingen</p>
-                        <p className="card--text card--text-percentage">{Math.round(studentsPresent/totalStudents*100)}% was aanwezig</p>
+                        <p className="card--text card--text-percentage">{percentage}</p>
                     </div>
                     <p className="text--lesson-time">{this.props.lesson.start}</p>
                     <div className="button-container--card">

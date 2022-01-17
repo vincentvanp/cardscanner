@@ -17,13 +17,13 @@ class ExcelController extends Controller
 
     public function importFile()
     {
-        $path = storage_path('\excel');
+        $path = storage_path('/excel');
         $files = File::allfiles($path); 
 
         foreach($files as $file)
         {
             $filename = basename($file);;
-            $fullpath = $path. '\\'.$filename;
+            $fullpath = $path. '//'.$filename;
             $fileOutput = Excel::toArray([],$fullpath);
             $course = Course::firstOrCreate([
                 'name' => trim($filename,".xlsx"),

@@ -30,5 +30,10 @@ class Student extends Model
     {
         return $this->lessons()->wherePivot('present', 1);
     }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'student_has_course', 'student_id')->withTimeStamps();
+    }
     
 }

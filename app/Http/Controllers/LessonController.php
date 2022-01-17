@@ -43,20 +43,28 @@ class LessonController extends Controller
         return $user->unstartedLessons->where('course_id', $request['course_id'])->toJson();
     }
 
-    public function createLesson(Request $request){
+    public function createLesson(Request $request)
+    {
         
-        $course_id = Course::where("name" , $request->course)->select("id")->first();
+        $course = Course::where("name" , $request->course)->first();
         $user = Auth::user();
+        $students = $course->students;
+
 
         $lesson = new Lesson;
 
         $lesson->name = $request->name;
-        $lesson->course_id =  $course_id->id;
+        $lesson->course_id =  $course->id;
         $lesson->start = $request->date . " " . $request->start;
         $lesson->end = $request->date . " " . $request->end;
         $lesson->save();
         
         $user->lessons()->attach($lesson, ["is_previous" => 0]);
+
+        foreach($students as $student)
+        {
+            $student->lessons()->attach($lesson,['present' => 0]);
+        }
         
         return ['status' => 'OK'];
     }

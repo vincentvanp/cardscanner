@@ -68,8 +68,12 @@ class DatabaseSeeder extends Seeder
             $this->scannersSeeder('scanner-' . $i);
         }
 
-        $this->coursesSeeder('Math');
-        $this->coursesSeeder('Project Web Dev');
+        $this->coursesSeeder('Math 1NXTA');
+        $this->coursesSeeder('Math 1NXTB');
+        $this->coursesSeeder('Math 1NXTC');
+        $this->coursesSeeder('Project Web Dev 1NXTA');
+        $this->coursesSeeder('Project Web Dev 1NXTB');
+        $this->coursesSeeder('Project Web Dev 1NXTC');
 
         $this->lessonsSeeder('Math1', '1');
         $this->lessonsSeeder('Math2', '1');

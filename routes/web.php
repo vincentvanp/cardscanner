@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,10 +24,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/import', [ExcelController::class, 'importFile']);
 Route::get('oauth/login/{provider}', [oAuthController::class, 'redirectToProvider'])->name('oauth.login');
 Route::get('oauth/callback/{provider}', [oAuthController::class, 'handleProviderCallback'])->name('oauth.callback');
-Route::get('teststuff', [ScannerController::class, 'test']);
 
 Route::view('/{any}', 'dashboard')->where('any', '.*');
 
@@ -53,5 +53,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('get-course-attendence', [StatisticsController::class, 'courseAttendence']);
     Route::post('get-late-percentage', [StatisticsController::class, 'latePercentage']);
 });
+
+
 
 require __DIR__ . '/auth.php';

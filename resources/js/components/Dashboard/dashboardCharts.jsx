@@ -26,6 +26,10 @@ class dashboardCharts extends React.Component {
         for(let i = 0; i < data.length; i++){
             const res = await axios.post("/get-course-attendence", {id: data[i].id});
 
+            if(res.data == 0){
+                continue;
+            }
+
             courses.push([data[i].name]);
 
             attendanceArray.push([data[i].name, [res.data, 100 - res.data]]);
@@ -37,6 +41,10 @@ class dashboardCharts extends React.Component {
         
         for(let i = 0; i < lessons.data.lessons.length; i++){
             const latePercentage = await axios.post('/get-late-percentage', {id: lessons.data.lessons[i].id});
+
+            if(latePercentage.data == 0){
+                continue;
+            }
 
             lateStudentsArray.push([lessons.data.lessons[i].course_id, latePercentage.data]);
         }

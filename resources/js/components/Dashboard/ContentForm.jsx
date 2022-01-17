@@ -16,6 +16,10 @@ class ContentForm extends React.Component{
         lessons: []
     };
 
+    validateMessages = {
+        required: '${label} moet ingevuld worden',
+    };
+
     async GetFormData() {
         const courses = await axios.post('/get-courses');
     
@@ -57,12 +61,9 @@ class ContentForm extends React.Component{
 
         this.UserHasLesson(values["lesson_id"]);
 
-        console.log( values['lesson_id']);
-        console.log( values['scanner']);
-
         sessionStorage.setItem("lesson_id", values['lesson_id']);
         sessionStorage.setItem("scanner", values['scanner']);
-    
+
         window.location.href = "/active-lesson";
     };
 
@@ -97,7 +98,7 @@ class ContentForm extends React.Component{
                     width={1000}
                     footer={[
                     ]}>
-                    <Form {...this.layout} form={this.form} onFinish={this.onFinish} name="control-hooks" className="Form--Start-les" layout="vertical" requiredMark={false}>
+                    <Form validateMessages={this.validateMessages} {...this.layout} form={this.form} onFinish={this.onFinish} name="control-hooks" className="Form--Start-les" layout="vertical" requiredMark={false}>
                         <Form.Item name="course_id" label="Course" rules={[{ required: true }]}>
                             <Select
                                 className="select--lesson-form"

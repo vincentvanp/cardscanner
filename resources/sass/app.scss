@@ -10,6 +10,8 @@
 @import "atoms/buttons";
 @import "atoms/links";
 @import "atoms/images";
+@import "atoms/bg";
+@import "atoms/pagination";
 @import "molecules/card";
 @import "molecules/select";
 @import "organisms/containers";
@@ -19,4 +21,4 @@
 @import "organisms/charts";
 @import "pages/home";
 @import "pages/ant";
-@import "pages/pages.scss";
+@import "pages/pages";

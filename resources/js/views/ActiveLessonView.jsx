@@ -1,4 +1,5 @@
-import { Input, Modal, Button, Form } from 'antd';
+import { Input, Modal, Button, Form, Select } from 'antd';
+const { Option } = Select;
 import axios from 'axios';
 import React from 'react';
 import UserTable from '../components/ActiveLesson/UserTable'
@@ -36,6 +37,8 @@ channel.bind(sessionStorage.getItem("scanner"), function (data) {
 
 class ActiveLessonView extends React.Component {
 
+    formRef = React.createRef();
+
     state = { visible: false , addVisible: false};
 
     showAddModal = () => {
@@ -45,6 +48,8 @@ class ActiveLessonView extends React.Component {
     };
 
     hideAddModal = () => {
+        this.formRef.current.resetFields();
+
         this.setState({
             addVisible: false,
         });
@@ -66,20 +71,26 @@ class ActiveLessonView extends React.Component {
         lesson: {
             channel: 'backToFront',
             event: "none",
+            scanner: sessionStorage.getItem("scanner"),
             name: sessionStorage.getItem('lesson_id'),
             id: '1'
-        }
+        },
+        students: [],
+    }
+
+    async GetStudents(){
+        let data = await axios.post('/get-students');
+
+        this.setState({ students: data.data});
     }
     
     async GetUserData(){
-        let data = await axios.post('/get-user-data')
-        .then(function(response){
-            return response.data;
-        }).catch(e => console.log(e));
-
+        let data = await axios.post('/get-user-data');
+        
         this.setState({ lesson: {
                             channel: 'backToFront',
-                            event: data.id,
+                            event: data.data.id,
+                            scanner: sessionStorage.getItem("scanner"),
                             name: sessionStorage.getItem('lesson_id'),
                             id: '1'
                         }});
@@ -89,15 +100,20 @@ class ActiveLessonView extends React.Component {
 
         sessionStorage.setItem("scanner", "");
         sessionStorage.setItem("coursename", "");
+        sessionStorage.setItem("selected", 1);
     
         window.location.href = "/lessons";
     }
 
     componentDidMount(){
         this.GetUserData();
+        this.GetStudents();
     }
 
     handleAddStudent = (values) => {
+
+        this.formRef.current.resetFields();
+        
         this.setState({
             addVisible: false,
         });
@@ -110,8 +126,8 @@ class ActiveLessonView extends React.Component {
 
     render() {
 
-        const {lesson} = this.state;
-        
+        const {students ,lesson} = this.state;
+
         if(lesson.event == "none"){
             return(
                 <React.Fragment>
@@ -127,7 +143,7 @@ class ActiveLessonView extends React.Component {
                     <div className="container--user-table">
                         <h1 className="text--page-title">Dasboard</h1>
                         <div className="container--active-table">
-                            <UserTable lesson={lesson.name} event={lesson.event} channel={lesson.channel} />
+                            <UserTable lesson={lesson.name} event={lesson.event} scanner={lesson.scanner} channel={lesson.channel} />
                             <Button className="button--add-student" onClick={this.showAddModal}>Studenten toevoegen</Button>
                             <Button className="button--stop-lesson" onClick={this.showModal}>Stop les</Button>
                         </div>
@@ -148,10 +164,17 @@ class ActiveLessonView extends React.Component {
                             footer={[]}
                             onCancel={this.hideAddModal}
                             className="modal--stop-lesson">
-                            <Form className="container--modal-buttons"
+                            <Form ref={this.formRef} className="container--modal-buttons"
                                     onFinish={this.handleAddStudent}>
                                 <Form.Item name="name">
-                                    <Input className="input--name" placeholder="naam"/>
+                                    <Select
+                                        showSearch
+                                        placeholder="Selecteer een student"
+                                        className="input--name">
+                                        {students.map((student) => {
+                                            return <Option key={student.id} value={student.name}>{student.name}</Option>;
+                                        })}
+                                    </Select>
                                 </Form.Item>
                                 <Form.Item>
                                     <Button className="button--confirm" htmlType="submit">toevoegen</Button>

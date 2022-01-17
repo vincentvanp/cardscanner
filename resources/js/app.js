@@ -1,12 +1,11 @@
 import ReactDOM from "react-dom";
 import React from "react";
+import { Layout } from 'antd';
 
 import { BrowserRouter as Router } from "react-router-dom";
 
 import 'antd/dist/antd.css';
 import '../sass/app.scss';
-
-import { Layout } from 'antd';
 
 import MainRouter from "./router/MainRouter"
 
@@ -27,7 +26,7 @@ if (document.getElementById('root')) {
         <Router>
             <Main />
         </Router>,
-        document.getElementById('root'));
+    document.getElementById('root'));
 }
 
 

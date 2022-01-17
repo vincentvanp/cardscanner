@@ -1,3 +1,7 @@
+.ant-layout-sider-children{
+    background-color: #201F1F;
+}
+
 .ant-space-item{
     width: 50%;
 }
@@ -9,4 +13,10 @@
 
 .ant-table-body{
     height: 100vh;
+}
+
+.ant-form-item-control-input-content{
+    button{
+        width: 100%;
+    }
 }

@@ -4,6 +4,7 @@
     align-items: center;
     height: 15%;
     margin: 0 0 50px 0;
+    background-color: #201F1F !important;
 }
 
 .container--main{
@@ -83,4 +84,17 @@
 
 .container--charts{
     display: flex;
+}
+
+.container--add-lesson{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.container--restart-form{
+    display: flex !important;
+    align-content: center !important;
+    flex-direction: column;
 }

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Table } from 'antd';
 import Pusher from "pusher-js"
 
+const { Column, ColumnGroup } = Table;
+
 class UserTable extends React.Component {
 
     state = {
@@ -55,6 +57,11 @@ class UserTable extends React.Component {
             dataIndex: 'serial_number',
             key: 'studentId',
         },
+        {
+            title: 'action',
+            dataIndex: 'action',
+            key: 'action',
+        },
 
     ]
 
@@ -81,7 +88,7 @@ class UserTable extends React.Component {
 
         return (
             <React.Fragment>
-                <Table title={() => "scanner: " + this.props.event} dataSource={datas} columns={this.columns} scroll={{ y: 500 }} pagination={false} />
+                <Table title={() => "scanner: " + this.props.scanner} dataSource={datas} columns={this.columns} scroll={{ y: 500 }} pagination={false}/>
             </React.Fragment>
         );
     }

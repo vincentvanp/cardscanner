@@ -5,8 +5,6 @@ import React, { Component } from 'react';
 import {
     Routes,
     Route,
-    BrowserRouter,
-    Link,
     Navigate,
     Outlet
 } from "react-router-dom";
@@ -20,6 +18,7 @@ import LoginView from '../views/LoginView';
 import PreviousLessonsView from '../views/PreviousLessonsView';
 import PreviousLessonDetailView from '../views/PreviousLessonDetailView';
 import LayoutView from '../views/LayoutView';
+import AddLessonView from '../views/AddLessonView';
 
 
 /**
@@ -36,6 +35,7 @@ const MainRouter = () => {
                 <Route path="/" element={<LayoutView Component={<DashboardView />} />} />
                 <Route path="active-lesson" element={<LayoutView Component={<ActiveLessonView />} />} />
                 <Route path="previous-lessons" element={<LayoutView Component={<PreviousLessonsView />} />} />
+                <Route path="add" element={<LayoutView Component={<AddLessonView />} />} />
                 <Route path="previous-lessons/:lessonId" element={<LayoutView Component={<PreviousLessonDetailView />} />} />
             </Route>
 

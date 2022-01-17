@@ -22,10 +22,14 @@ class ExcelController extends Controller
             $filename = basename($file);;
             $fullpath = $path. '\\'.$filename;
             $fileOutput = Excel::toArray([],$fullpath);
+            foreach($fileOutput as $fileout){
+                dd($fileout);
+            }
+            
             $course = Course::firstOrCreate([
                 'name' => trim($filename,".xlsx"),
             ]);
-            print_r($fileOutput);
+            // dd($fileOutput);
            
         }
 

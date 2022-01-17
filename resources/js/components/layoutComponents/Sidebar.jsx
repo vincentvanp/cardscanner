@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-    Link,
-    useHistory
+    Link
 } from 'react-router-dom';
 
 import { Button, Layout, Menu } from 'antd';

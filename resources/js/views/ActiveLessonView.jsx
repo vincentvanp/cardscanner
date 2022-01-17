@@ -100,6 +100,7 @@ class ActiveLessonView extends React.Component {
 
         sessionStorage.setItem("scanner", "");
         sessionStorage.setItem("coursename", "");
+        sessionStorage.setItem("selected", 1);
     
         window.location.href = "/lessons";
     }

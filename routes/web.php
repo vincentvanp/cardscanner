@@ -10,7 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\StatisticsController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\DatabaseFillerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('oauth/login/{provider}', [oAuthController::class, 'redirectToProvider'])->name('oauth.login');
 Route::get('oauth/callback/{provider}', [oAuthController::class, 'handleProviderCallback'])->name('oauth.callback');
-Route::get('teststuff', [ScannerController::class, 'test']);
+Route::get('teststuff', [DatabaseFillerController::class, 'getStudents']);
 
 Route::view('/{any}', 'dashboard')->where('any', '.*');
 

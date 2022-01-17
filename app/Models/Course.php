@@ -16,4 +16,9 @@ class Course extends Model
     {
         return $this->hasMany(Lesson::class, 'course_id');
     }
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'course_has_student', 'course_id')->withTimeStamps();
+    }
 }

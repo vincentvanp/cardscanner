@@ -79,7 +79,7 @@ class ActiveLessonView extends React.Component {
     }
 
     async GetStudents(){
-        let data = await axios.post('/get-students');
+        let data = await axios.post('/get-absent-students', {lesson_id: sessionStorage.getItem('lesson_id')});
 
         this.setState({ students: data.data});
     }
@@ -164,8 +164,7 @@ class ActiveLessonView extends React.Component {
                             footer={[]}
                             onCancel={this.hideAddModal}
                             className="modal--stop-lesson">
-                            <Form ref={this.formRef} className="container--modal-buttons"
-                                    onFinish={this.handleAddStudent}>
+                            <Form ref={this.formRef} className="container--modal-buttons" onFinish={this.handleAddStudent}>
                                 <Form.Item name="name">
                                     <Select
                                         showSearch

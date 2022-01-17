@@ -23,7 +23,7 @@ class ScannerController extends Controller
     //Function to store a scanned student from pusher in the database
     public function storeStudent(Request $request)
     {
-
+        
         if(isset($request["serial"]))
         {
             $student = Student::where('serial_number', $request["serial"])->first();
@@ -36,12 +36,19 @@ class ScannerController extends Controller
         {
             return ['status' => 'ERROR'];
         }
-
+        
         $lesson = Lesson::where('id', $request["lesson_id"])->first();
         $user = Auth::user();
         
         $attendedLessons = $student->attendedLessons;
-        
+
+        $present = DB::table("student_has_lesson")->where("student_id", $student->id)->where("lesson_id", $request["lesson_id"])->first();
+
+        if($present->present == 0)
+        {
+            $time = Carbon::parse($student->lessons()->first()->pivot->updated_at)->format('H:i');
+            event(new populateUserTable($student->name, $request["serial"], $time));
+        }
 
         //Change present to true by checking if studenthaslesson already exists
         if($student->lessons->contains($lesson))
@@ -50,10 +57,7 @@ class ScannerController extends Controller
         }else
         {
             $student->lessons()->attach($lesson,['present' => 1]);
-            $time = Carbon::parse($student->lessons()->first()->pivot->updated_at)->format('H:i');
-            event(new populateUserTable($student->name, $request["serial"], $time));
         }
-        
         
         $user->scancount += 1;
         $user->save();

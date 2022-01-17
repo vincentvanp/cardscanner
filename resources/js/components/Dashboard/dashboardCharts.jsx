@@ -74,6 +74,8 @@ class dashboardCharts extends React.Component {
 
         const {lateData, dataSet} = this.state;
         
+        console.log(lateData);
+
         if(dataSet.data == "" || lateData.data == undefined){
             return <Spin/>
         }else{

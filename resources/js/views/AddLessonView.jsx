@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Checkbox, Spin, DatePicker, TimePicker , Input, Form, Select, Button} from 'antd';
 
+const { Option } = Select;
 const { RangePicker } = TimePicker;
 
 const axios = require('axios').default;

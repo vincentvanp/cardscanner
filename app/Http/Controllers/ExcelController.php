@@ -15,11 +15,13 @@ class ExcelController extends Controller
 {
     //
 
-    public function importFile(){
+    public function importFile()
+    {
         $path = storage_path('\excel');
         $files = File::allfiles($path); 
 
-        foreach($files as $file){
+        foreach($files as $file)
+        {
             $filename = basename($file);;
             $fullpath = $path. '\\'.$filename;
             $fileOutput = Excel::toArray([],$fullpath);
@@ -27,8 +29,11 @@ class ExcelController extends Controller
                 'name' => trim($filename,".xlsx"),
             ]);
             
-            foreach($fileOutput as $fileout){
-                foreach(array_slice($fileout,1) as $row){
+            
+            foreach($fileOutput as $fileout)
+            {
+                foreach(array_slice($fileout,1) as $row)
+                {
                     $studentName= $row[2];
                     $student = Student::firstOrNew(['name' => $studentName]);
                     $student->save();

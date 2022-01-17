@@ -27,7 +27,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/import', [ExcelController::class, 'importFile']);
 Route::get('oauth/login/{provider}', [oAuthController::class, 'redirectToProvider'])->name('oauth.login');
 Route::get('oauth/callback/{provider}', [oAuthController::class, 'handleProviderCallback'])->name('oauth.callback');
-Route::get('teststuff', [DatabaseFillerController::class, 'getStudents']);
 
 Route::view('/{any}', 'dashboard')->where('any', '.*');
 

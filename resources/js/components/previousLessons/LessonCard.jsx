@@ -14,6 +14,10 @@ class PreviousLessonCard extends React.Component{
         scanners: [],
     };
 
+    validateMessages = {
+        required: '${label} moet ingevuld worden',
+    };
+
     async GetLessonData(){
 
         const present_students = await axios.post('/get-attending-students', {lesson_id: this.props.lesson.id});
@@ -99,7 +103,7 @@ class PreviousLessonCard extends React.Component{
                     width={1000}
                     footer={[
                     ]}>
-                        <Form validateMessages={this.validateMessages} onFinish={this.HandleRestartLesson}>
+                        <Form className='container--restart-form' validateMessages={this.validateMessages} onFinish={this.HandleRestartLesson}>
                             <Form.Item name="scanner" label="Scanner" rules={[{ required: true }]}>
                                 <Select
                                     className="select--lesson-form"
@@ -112,7 +116,7 @@ class PreviousLessonCard extends React.Component{
                                     ))}
                                 </Select>
                             </Form.Item>
-                            <Form.Item wrapperCol={{ span: 16 }}>
+                            <Form.Item className='container--restart-button'>
                                 <Button className="button--lesson-form" type="primary" htmlType="submit">
                                     start
                                 </Button>

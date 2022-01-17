@@ -92,3 +92,9 @@
     justify-content: center;
     border-radius: 10px;
 }
+
+.container--restart-form{
+    display: flex !important;
+    align-content: center !important;
+    flex-direction: column;
+}

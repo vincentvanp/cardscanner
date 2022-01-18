@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'antd';
 import Pusher from "pusher-js"
+import { data } from 'autoprefixer';
 
 const { Column, ColumnGroup } = Table;
 
@@ -8,7 +9,8 @@ class UserTable extends React.Component {
 
     state = {
         studentData: [],
-        lessonData: []
+        lessonData: [],
+        absentData: []
     }
 
     pusherBind(channel, event) {
@@ -24,8 +26,10 @@ class UserTable extends React.Component {
 
     async GetLessonData(){
         const lesson = await axios.post("/get-attending-students", {lesson_id: this.props.lesson});
+        let data = await axios.post('/get-absent-students', {lesson_id: sessionStorage.getItem('lesson_id')});
 
-        this.setState({lessonData: lesson.data});
+        this.setState({lessonData: lesson.data,
+                        absentData: data.data});
     }
 
     componentDidMount() {
@@ -58,37 +62,58 @@ class UserTable extends React.Component {
             key: 'studentId',
         },
         {
-            title: 'action',
+            title: 'verwijderen',
             dataIndex: 'action',
             key: 'action',
         },
 
     ]
 
+    Delete = (props) =>{
+        return(
+            <a onClick={() => {
+                console.log(props.student);
+            }} style={{color: "red"}}>verwijderen</a>
+        );
+    }
+
     render() {
 
-        const {lessonData} = this.state;
+        const {absentData, lessonData} = this.state;
 
         const datas = [...this.state.studentData];
+
+        absentData.map((data) => {
+            data.updated_at = "";
+        })
+
+        datas.map((data) => {
+            data.action = <this.Delete student={data}/>;
+        })
 
         lessonData.map((data) => {
             var updated_at = data.updated_at.split(" ");
             if(updated_at[1] != undefined){
                 updated_at = updated_at[1].split(":");
                 data.updated_at = updated_at[0] +":"+updated_at[1];
+                data.action = <this.Delete student={data}/>;
                 datas.push(data);
             }else{
+                data.action = <this.Delete student={data}/>;
                 datas.push(data);
             }
         })
 
-        datas.map((data, index) =>{
-            data.key = index
+        datas.push({name:<h3 style={{color: "red"}}>Afwezig</h3>});
+        const students = datas.concat(absentData);
+
+        students.map((student, index) =>{
+            student.key = index;
         })
 
         return (
             <React.Fragment>
-                <Table title={() => "scanner: " + this.props.scanner} dataSource={datas} columns={this.columns} scroll={{ y: 500 }} pagination={false}/>
+                <Table title={() => "scanner: " + this.props.scanner} dataSource={students} columns={this.columns} scroll={{ y: 500 }} pagination={false}/>
             </React.Fragment>
         );
     }

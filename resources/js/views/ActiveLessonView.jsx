@@ -1,4 +1,4 @@
-import { Input, Modal, Button, Form, Select } from 'antd';
+import { Modal, Button, Form, Select, Spin } from 'antd';
 const { Option } = Select;
 import axios from 'axios';
 import React from 'react';
@@ -79,7 +79,7 @@ class ActiveLessonView extends React.Component {
     }
 
     async GetStudents(){
-        let data = await axios.post('/get-students');
+        let data = await axios.post('/get-absent-students', {lesson_id: sessionStorage.getItem('lesson_id')});
 
         this.setState({ students: data.data});
     }
@@ -117,23 +117,29 @@ class ActiveLessonView extends React.Component {
         this.setState({
             addVisible: false,
         });
-
+        
         axios.post('/student-has-lesson', {
             'name': values.name,
             'lesson_id': sessionStorage.getItem("lesson_id")
         });
+
+        this.GetStudents();
     }
 
     render() {
 
         const {students ,lesson} = this.state;
 
+        students.map((student, index) =>{
+            student.key = index;
+        })
+
         if(lesson.event == "none"){
             return(
                 <React.Fragment>
                     <div className="container--user-table">
                         <h1 className="text--page-title">Dasboard</h1>
-                        <h1>loading...</h1>
+                        <Spin/>
                     </div>
                 </React.Fragment>
             )
@@ -164,15 +170,14 @@ class ActiveLessonView extends React.Component {
                             footer={[]}
                             onCancel={this.hideAddModal}
                             className="modal--stop-lesson">
-                            <Form ref={this.formRef} className="container--modal-buttons"
-                                    onFinish={this.handleAddStudent}>
+                            <Form ref={this.formRef} className="container--modal-buttons" onFinish={this.handleAddStudent}>
                                 <Form.Item name="name">
                                     <Select
                                         showSearch
                                         placeholder="Selecteer een student"
                                         className="input--name">
                                         {students.map((student) => {
-                                            return <Option key={student.id} value={student.name}>{student.name}</Option>;
+                                            return <Option key={student.key} value={student.name}>{student.name}</Option>;
                                         })}
                                     </Select>
                                 </Form.Item>

@@ -47,12 +47,20 @@ class PreviousDetail extends React.Component{
 
         const { absent_students, present_students} = this.state;
 
+        present_students.push({name:<h3 style={{color: "red"}}>Afwezig</h3>});
+
+        const students = present_students.concat(absent_students);
+
+        students.map((student, index) =>{
+            student.key = index;
+        })
+
         if(present_students != undefined){
             return(
                 <React.Fragment>
                     <div style={{ padding: '1%' }}>
                         <Table 
-                            dataSource={present_students} 
+                            dataSource={students} 
                             columns={this.columns} 
                             scroll={{ y: 500 }}
                             showHeader={false}

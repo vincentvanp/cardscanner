@@ -31,6 +31,10 @@ class Sidebar extends React.Component{
 
     componentDidMount(){
         this.GetUserData();
+
+        if(sessionStorage.getItem("selected") == null){
+            sessionStorage.setItem("selected", 1);
+        }
     }
 
     onchange = (values) =>{

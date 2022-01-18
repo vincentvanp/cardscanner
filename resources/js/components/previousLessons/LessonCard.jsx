@@ -61,13 +61,41 @@ class PreviousLessonCard extends React.Component{
         });
     };
 
+    CardButtons = () =>{
+
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+        var limitDate = new Date(this.props.lesson.start);
+        limitDate.setDate(limitDate.getDate() + 2);
+        limitDate = limitDate.getFullYear()+'-'+(limitDate.getMonth()+1)+'-'+limitDate.getDate();
+        
+        if(date < limitDate){
+            return(
+                <div className="button-container--card">
+                    <Button className="button--add-student" onClick={() => {
+                        window.location.href = "previous-lessons/" + this.props.lesson.id;
+                    }}>Meer info</Button>
+                    <Button className="button--add-student" onClick={this.showModal}>Les herstarten</Button>
+                </div>
+            );
+        }else{
+            return(
+                <div className="button-container--card">
+                    <Button className="button--add-student" onClick={() => {
+                        window.location.href = "previous-lessons/" + this.props.lesson.id;
+                    }}>Meer info</Button>
+                </div>
+            );
+        }
+    }
+
     render(){
 
         const {scanners, visible, loaded, present_students, absent_students} = this.state;
 
         var studentsPresent = present_students.length;
         var totalStudents = present_students.length + absent_students.length;
-
         var percentage = 0;
 
         if(totalStudents == 0){
@@ -87,12 +115,7 @@ class PreviousLessonCard extends React.Component{
                             <p className="card--text card--text-percentage">{percentage}</p>
                         </div>
                         <p className="text--lesson-time">{this.props.lesson.start}</p>
-                        <div className="button-container--card">
-                            <Button className="button--add-student" onClick={() => {
-                                window.location.href = "previous-lessons/" + this.props.lesson.id;
-                            }}>Meer info</Button>
-                            <Button className="button--add-student" onClick={this.showModal}>Les herstarten</Button>
-                        </div>
+                        <this.CardButtons/>
                     </Card>
 
                     <Modal

@@ -6,40 +6,44 @@ import UserTable from '../components/ActiveLesson/UserTable'
 
 window.Pusher = require('pusher-js');
 
-var pusher = new Pusher(process.env.MIX_PUSHER_APP_KEY, {
-    cluster: 'eu'
-});
-
-var channel = pusher.subscribe('scanner-channel');
-
-channel.bind(sessionStorage.getItem("scanner"), function (data) {
-
-    if(data.message != undefined && data.message != "scanner starting up!!!"){
-        axios.post('/student-has-lesson', {
-            'serial': data.message,
-            'lesson_id': sessionStorage.getItem("lesson_id")
-        })
-        .catch(function (error) {
-            console.log(error);
-        })
-        .then(function (res) {
-            console.log(res);
-        });
-    }else if(data.message == "scanner starting up!!!"){
-        console.log(data.message);
-    }else{
-        axios.post('/student-has-lesson', {
-            'serial': data,
-            'lesson_id': sessionStorage.getItem("lesson_id")
-        });
-    }
-});
 
 class ActiveLessonView extends React.Component {
 
-    formRef = React.createRef();
+    RunPusher = () => {
+        var pusher = new Pusher(process.env.MIX_PUSHER_APP_KEY, {
+            cluster: 'eu'
+        });
+        
+        var channel = pusher.subscribe('scanner-channel');
+        
+        channel.bind(sessionStorage.getItem("scanner"), function (data) {
+        
+            if(data.message != undefined && data.message != "scanner starting up!!!"){
+                axios.post('/student-has-lesson', {
+                    'serial': data.message,
+                    'lesson_id': sessionStorage.getItem("lesson_id")
+                });
 
-    state = { visible: false , addVisible: false};
+                Scanned();
+            }else if(data.message == "scanner starting up!!!"){
+                console.log(data.message);
+            }else{
+                axios.post('/student-has-lesson', {
+                    'serial': data,
+                    'lesson_id': sessionStorage.getItem("lesson_id")
+                });
+
+                Scanned();
+            }
+
+        });
+
+        const Scanned = () =>{
+            this.GetStudents();
+        }
+    }
+
+    formRef = React.createRef();
 
     showAddModal = () => {
         this.setState({
@@ -76,12 +80,8 @@ class ActiveLessonView extends React.Component {
             id: '1'
         },
         students: [],
-    }
-
-    async GetStudents(){
-        let data = await axios.post('/get-absent-students', {lesson_id: sessionStorage.getItem('lesson_id')});
-
-        this.setState({ students: data.data});
+        visible: false, 
+        addVisible: false
     }
     
     async GetUserData(){
@@ -96,6 +96,12 @@ class ActiveLessonView extends React.Component {
                         }});
     }
 
+    async GetStudents(){
+        let data = await axios.post('/get-absent-students', {lesson_id: sessionStorage.getItem('lesson_id')});
+        
+        this.setState({ students: data.data});
+    }
+
     handleStopLesson = () => {
 
         sessionStorage.setItem("scanner", "");
@@ -108,6 +114,7 @@ class ActiveLessonView extends React.Component {
     componentDidMount(){
         this.GetUserData();
         this.GetStudents();
+        this.RunPusher();
     }
 
     handleAddStudent = (values) => {
@@ -128,7 +135,7 @@ class ActiveLessonView extends React.Component {
 
     render() {
 
-        const {students ,lesson} = this.state;
+        const { students, lesson} = this.state;
 
         students.map((student, index) =>{
             student.key = index;

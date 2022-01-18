@@ -26,23 +26,34 @@ class UserTable extends React.Component {
 
     async GetLessonData(){
         const lesson = await axios.post("/get-attending-students", {lesson_id: this.props.lesson});
-        let data = await axios.post('/get-absent-students', {lesson_id: sessionStorage.getItem('lesson_id')});
+        
+        
+        console.log(data.data);
 
-        this.setState({lessonData: lesson.data,
-                        absentData: data.data});
+        this.setState({lessonData: lesson.data});
+    }
+
+    async GetAbsentStudents(){
+        const data = await axios.post('/get-absent-students', {lesson_id: sessionStorage.getItem('lesson_id')});
+
+        this.setState({absentData: data.data});
     }
 
     componentDidMount() {
 
         this.pusherBind(this.props.channel, this.props.event);
         this.GetLessonData();
+        this.GetAbsentStudents();
     }
 
     receiveUpdateFromPusher = data => {
 
         // pusherData looks like this {"studentName": "Name", "studentId": 1234, "time": "12:30"}
         const studentData = [data, ...this.state.studentData];
-        this.setState({ studentData });
+        
+        this.GetAbsentStudents();
+        
+        this.setState({ studentData});
     }
 
     columns = [

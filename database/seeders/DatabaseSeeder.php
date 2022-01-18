@@ -68,25 +68,6 @@ class DatabaseSeeder extends Seeder
             $this->scannersSeeder('scanner-' . $i);
         }
 
-        $this->coursesSeeder('Math 1NXTA');
-        $this->coursesSeeder('Math 1NXTB');
-        $this->coursesSeeder('Math 1NXTC');
-        $this->coursesSeeder('Project Web Dev 1NXTA');
-        $this->coursesSeeder('Project Web Dev 1NXTB');
-        $this->coursesSeeder('Project Web Dev 1NXTC');
-
-        $this->lessonsSeeder('Math1', '1');
-        $this->lessonsSeeder('Math2', '1');
-        $this->lessonsSeeder('Project Web Dev1', '2');
-        $this->lessonsSeeder('Project Web Dev2', '2');
-
-        // student seeder adds students to student table
-        $this->studentsSeeder('Rickert', 'e95a8ef7');
-        $this->studentsSeeder('Cedric', '4c532a01');
-        $this->studentsSeeder('Ralph', 'd3edc6a9');
-        $this->studentsSeeder('Louis', 'fcea2701');
-        $this->studentsSeeder('Stef', '3ff08959');
-        $this->studentsSeeder('Matyas', 'a20ea38b');
-        $this->studentsSeeder('Thi Loan', '8c507402');
+       
     }
 }

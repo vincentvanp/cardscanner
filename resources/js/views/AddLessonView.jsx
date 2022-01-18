@@ -59,6 +59,9 @@ class AddLessonView extends React.Component{
         const {startTime, endTime, date} = this.state;
         
         axios.post('/create-lesson', {name: values.name, course: values.course, start: startTime, end: endTime, date: date});
+
+        sessionStorage.setItem("selected", 1);
+        window.location.href = "/";
     }
 
     render(){

@@ -101,6 +101,12 @@ class PreviousLessons extends React.Component {
                             <Card className="card">
                                 <Skeleton/>
                             </Card>
+                            <Card className="card">
+                                <Skeleton/>
+                            </Card>
+                            <Card className="card">
+                                <Skeleton/>
+                            </Card>
                         </Space>
                         
                     </div>

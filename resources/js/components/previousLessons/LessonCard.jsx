@@ -96,7 +96,6 @@ class PreviousLessonCard extends React.Component{
 
         var studentsPresent = present_students.length;
         var totalStudents = present_students.length + absent_students.length;
-
         var percentage = 0;
 
         if(totalStudents == 0){

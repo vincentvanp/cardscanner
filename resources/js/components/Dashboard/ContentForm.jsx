@@ -22,7 +22,7 @@ class ContentForm extends React.Component{
 
     async GetFormData() {
         const courses = await axios.post('/get-courses');
-    
+
         const scanners = await axios.post('/get-scanners');
 
         this.setState({ courses: courses.data, scanners: scanners.data });
@@ -30,6 +30,8 @@ class ContentForm extends React.Component{
 
     async GetlessonData(value){
         const lessons = await axios.post('/get-lesson-by-course', {course_id: value});
+
+        console.log(lessons.data);
 
         this.setState({ lessons: lessons.data });
     }

@@ -25,7 +25,7 @@ const LineChart = (props) =>{
             backgroundColor: Colors[i],
         });
 
-        labels.push("les " + i);
+        labels.push("les " + (i+1));
     }
 
     var data = {   

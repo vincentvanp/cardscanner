@@ -40,7 +40,14 @@ class LessonController extends Controller
     public function getUnstartedLessonsByCourse(Request $request)
     {
         $user = Auth::user();
-        return $user->unstartedLessons->where('course_id', $request['course_id'])->toJson();
+        $lessons =  $user->unstartedLessons->where('course_id', $request['course_id']);
+        $lessonArray = [];
+
+        foreach($lessons as $lesson){
+            array_push($lessonArray, $lesson);
+        }
+
+        return $lessonArray;
     }
 
     public function createLesson(Request $request)

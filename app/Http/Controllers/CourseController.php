@@ -26,9 +26,10 @@ class CourseController extends Controller
         return $courses->toJson(); 
     }
 
+    //Function that returns all courses
     public function getAllCourses()
     {
-        $courses = DB::table("courses")->get();
+        $courses = Course::all();
 
         return $courses->toJson();
     }

@@ -25,12 +25,9 @@ class UserTable extends React.Component {
     }
 
     async GetLessonData(){
-        const lesson = await axios.post("/get-attending-students", {lesson_id: this.props.lesson});
-        
-        
-        console.log(data.data);
+        const data = await axios.post("/get-attending-students", {lesson_id: this.props.lesson});
 
-        this.setState({lessonData: lesson.data});
+        this.setState({lessonData: data.data});
     }
 
     async GetAbsentStudents(){
@@ -51,9 +48,33 @@ class UserTable extends React.Component {
         // pusherData looks like this {"studentName": "Name", "studentId": 1234, "time": "12:30"}
         const studentData = [data, ...this.state.studentData];
         
+        this.GetLessonData();
         this.GetAbsentStudents();
-        
-        this.setState({ studentData});
+    }
+
+    Delete = (props) =>{
+
+        return(
+            <a onClick={() => {
+
+                const studentData = [...this.state.studentData];
+
+                for(let i = 0; i < studentData.length; i++){
+                    if(studentData[i].name == props.student.name){
+
+                        studentData.splice(i, 1);
+                    }
+                }
+
+                axios.post("/remove-student", { lesson_id: sessionStorage.getItem('lesson_id'), name: props.student.name });
+                
+                this.GetLessonData();
+                this.GetAbsentStudents();
+
+                this.setState({studentData: studentData});
+
+            }} style={{color: "red"}}>verwijderen</a>
+        );
     }
 
     columns = [
@@ -79,35 +100,6 @@ class UserTable extends React.Component {
         },
 
     ]
-
-    Delete = (props) =>{
-
-        return(
-            <a onClick={() => {
-                const {absentData, lessonData} = this.state;
-
-                axios.post("/remove-student", { lesson_id: sessionStorage.getItem('lesson_id'), name: props.student.name });
-
-                var student = props.student
-
-                student.action = "";
-
-                absentData.push(props.student);
-                
-                for(let i = 0; i < lessonData.length; i++){
-                    if(lessonData[i].name == props.student.name){
-
-                        console.log(lessonData[i].name);
-                        console.log(props.student.name);
-                        lessonData.splice(i, 1);
-                    }
-                }
-
-                this.setState({ absentData: absentData, lessonData: lessonData});
-
-            }} style={{color: "red"}}>verwijderen</a>
-        );
-    }
 
     render() {
 

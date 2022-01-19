@@ -26,22 +26,26 @@ import AddLessonView from '../views/AddLessonView';
  * 
  * @returns Routes
  */
-const MainRouter = () => {
-    return (
-        <Routes>
-            <Route exact path="/login" element={<LoginView />} />
 
-            <Route path="/" element={<Private />} >
-                <Route path="/" element={<LayoutView Component={<DashboardView />} />} />
-                <Route path="active-lesson" element={<LayoutView Component={<ActiveLessonView />} />} />
-                <Route path="previous-lessons" element={<LayoutView Component={<PreviousLessonsView />} />} />
-                <Route path="add" element={<LayoutView Component={<AddLessonView />} />} />
-                <Route path="previous-lessons/:lessonId" element={<LayoutView Component={<PreviousLessonDetailView />} />} />
-            </Route>
+ class MainRouter extends React.Component{
 
-            <Route path='*' element={<Navigate replace to="/" />} />
-        </Routes>
-    );
+    render(){
+        return (
+            <Routes>
+                <Route exact path="/login" element={<LoginView />} />
+
+                <Route path="/" element={<Private />} >
+                    <Route path="/" element={<LayoutView Component={<DashboardView />} />} />
+                    <Route path="active-lesson" element={<LayoutView Component={<ActiveLessonView />} />} />
+                    <Route path="previous-lessons" element={<LayoutView Component={<PreviousLessonsView />} />} />
+                    <Route path="add" element={<LayoutView Component={<AddLessonView />} />} />
+                    <Route path="previous-lessons/:lessonId" element={<LayoutView Component={<PreviousLessonDetailView />} />} />
+                </Route>
+
+                <Route path='*' element={<Navigate replace to="/" />} />
+            </Routes>
+        );
+    }
 };
 
 /**

@@ -4,9 +4,9 @@ import React, { Component } from 'react';
 class LoginView extends Component {
 
     async GetUserData(){
-        let data = await axios.post('/get-user-data');
+        let data = await axios.post('/get-logged-in');
 
-        if(data != undefined){
+        if(data.data){
             window.location.href = "/";
         }
     }

@@ -9,8 +9,6 @@ import '../sass/app.scss';
 
 import MainRouter from "./router/MainRouter"
 
-window.Pusher = require('pusher-js');
-
 function Main(){
 
     return(

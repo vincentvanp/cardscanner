@@ -16,4 +16,15 @@ class UserController extends Controller
         $user = Auth::user();
         return $lesson->users()->updateExistingPivot($user,['is_previous' => 1]);
     }
+
+    public function loggedIn()
+    {
+        $user = Auth::user();
+
+        if($user == null){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

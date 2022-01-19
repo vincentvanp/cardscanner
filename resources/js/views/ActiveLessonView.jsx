@@ -6,8 +6,21 @@ import UserTable from '../components/ActiveLesson/UserTable'
 
 window.Pusher = require('pusher-js');
 
-
 class ActiveLessonView extends React.Component {
+    formRef = React.createRef();
+
+    state = {
+        lesson: {
+            channel: 'backToFront',
+            event: "none",
+            scanner: sessionStorage.getItem("scanner"),
+            name: sessionStorage.getItem('lesson_id'),
+            id: '1'
+        },
+        students: [],
+        visible: false, 
+        addVisible: false
+    }
 
     RunPusher = () => {
         var pusher = new Pusher(process.env.MIX_PUSHER_APP_KEY, {
@@ -43,8 +56,6 @@ class ActiveLessonView extends React.Component {
         }
     }
 
-    formRef = React.createRef();
-
     showAddModal = () => {
         this.setState({
             addVisible: true,
@@ -70,19 +81,6 @@ class ActiveLessonView extends React.Component {
         visible: false,
       });
     };
-
-    state = {
-        lesson: {
-            channel: 'backToFront',
-            event: "none",
-            scanner: sessionStorage.getItem("scanner"),
-            name: sessionStorage.getItem('lesson_id'),
-            id: '1'
-        },
-        students: [],
-        visible: false, 
-        addVisible: false
-    }
     
     async GetUserData(){
         let data = await axios.post('/get-user-data');

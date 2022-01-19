@@ -1,7 +1,8 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import PreviousDetail from "../components/previousLessons/previousDetail"
 import { Layout } from 'antd';
+import { useParams } from 'react-router-dom';
+
+import PreviousDetail from "../components/previousLessons/previousDetail";
 
 function PreviousLessonDetailView(){
 

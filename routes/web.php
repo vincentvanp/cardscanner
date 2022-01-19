@@ -10,7 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\StatisticsController;
-use App\Http\Controllers\TestController;
+//use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*

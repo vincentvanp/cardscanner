@@ -16,11 +16,16 @@ class Sidebar extends React.Component{
     }
 
     async GetUserData(){
-        let data = await axios.post('/get-logged-in');
+        let data = await axios.post('/get-user-data')
+        .then(function(response){
+            return response.data;
+        });
 
-        if(!data.data){
+        if(data == undefined){
             window.location.href = "/login";
         }
+        
+        this.setState({ user: data});
     }
 
     componentDidMount(){

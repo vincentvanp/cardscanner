@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('previous-lessons', [LessonController::class, 'getPreviousLessons']);
     Route::post('get-lessons', [LessonController::class, 'getUnstartedLessons']);
     Route::post('get-lesson-by-course', [LessonController::class, 'getUnstartedLessonsByCourse']);
-    Route::post('previous-courses', [LessonController::class, 'getDataLoggedInUser']); //x
+    //Route::post('previous-courses', [LessonController::class, 'getDataLoggedInUser']); //x
     Route::post('create-lesson', [LessonController::class, 'createLesson']);
 
     Route::post('get-scanners', [ScannerController::class, 'getScanners']);

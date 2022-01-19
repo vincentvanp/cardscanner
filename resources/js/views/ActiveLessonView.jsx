@@ -135,7 +135,7 @@ class ActiveLessonView extends React.Component {
 
     render() {
 
-        const { students, lesson} = this.state;
+        const { students, lesson } = this.state;
 
         students.map((student, index) =>{
             student.key = index;

@@ -56,8 +56,6 @@ class ActiveLessonView extends React.Component {
     }
 
     receiveUpdateFromPusher = data => {
-
-        console.log(data);
         this.GetStudents();
     }
     
@@ -118,8 +116,6 @@ class ActiveLessonView extends React.Component {
 
     async GetStudents(){
         let data = await axios.post('/get-absent-students', {lesson_id: sessionStorage.getItem('lesson_id')});
-        
-        console.log(data.data);
 
         this.setState({ students: data.data});
     }

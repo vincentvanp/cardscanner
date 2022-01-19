@@ -43,7 +43,8 @@ class LessonController extends Controller
         $lessons =  $user->unstartedLessons->where('course_id', $request['course_id']);
         $lessonArray = [];
 
-        foreach($lessons as $lesson){
+        foreach($lessons as $lesson)
+        {
             array_push($lessonArray, $lesson);
         }
 

@@ -44,14 +44,8 @@ class ExcelController extends Controller
                     }
                 }
             }
-            
-            
-            // dd($fileOutput);
            
-        }
-
-       
-        
+        }        
         
     }
 }

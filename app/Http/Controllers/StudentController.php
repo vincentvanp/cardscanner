@@ -37,10 +37,25 @@ class StudentController extends Controller
         return $students->toJson();
     }
 
-    public function getAllStudents(){
+    public function deleteStudentPresent(Request $request) 
+    {
         
-        $students = DB::table("students")->get();
-        
-        return $students;
+        if(isset($request["serial"]))
+        {
+            $student = Student::where('serial_number', $request["serial"])->first();
+        }
+        elseif(isset($request["name"]))
+        {
+            $student = Student::where('name', $request["name"])->first();
+        }
+        else
+        {
+            return ['status' => 'ERROR'];
+        }
+
+        $lesson = Lesson::where('id', $request["lesson_id"])->first();
+
+        return $student->lessons()->updateExistingPivot($lesson,['present' => 0]);
+
     }
 }

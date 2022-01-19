@@ -10,7 +10,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\StatisticsController;
-//use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,20 +37,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('previous-lessons', [LessonController::class, 'getPreviousLessons']);
     Route::post('get-lessons', [LessonController::class, 'getUnstartedLessons']);
     Route::post('get-lesson-by-course', [LessonController::class, 'getUnstartedLessonsByCourse']);
-    //Route::post('previous-courses', [LessonController::class, 'getDataLoggedInUser']); //x
     Route::post('create-lesson', [LessonController::class, 'createLesson']);
 
     Route::post('get-scanners', [ScannerController::class, 'getScanners']);
     Route::post('student-has-lesson', [ScannerController::class, 'storeStudent']);
-    //Route::post('add-student-by-name', [ScannerController::class, 'storeStudentByName']); //x
 
     Route::post('get-courses', [CourseController::class, 'getUserCourses']);
     Route::post('get-all-courses', [CourseController::class, 'getAllCourses']);
 
     Route::post('get-attending-students', [StudentController::class, 'getAttendingStudents']);
     Route::post('get-absent-students', [StudentController::class, 'getAbsentStudents']);
-    //Route::post('get-student', [StudentController::class, 'getAbsentStudents']); //x
-    //Route::post('get-students', [StudentController::class, 'getAllStudents']); //x
     Route::post('remove-student', [StudentController::class, 'deleteStudentPresent']);
 
     Route::post('get-course-attendence', [StatisticsController::class, 'courseAttendence']);

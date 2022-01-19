@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { Layout, Select } from 'antd';
 
 const { Option } = Select;
 
 import PreviousLessons from '../components/previousLessons/previousLessons';
 
-class PreviousLessonsView extends Component {
+class PreviousLessonsView extends React.Component {
     
     state = {
         courses: [],
         course: 0
     }
     
-    componentDidMount(){
-        this.GetData();
-    }
-
     async GetData(){
         const {data} = await axios.post('/get-courses');
         
         this.setState({ courses: data });
+    }
+    
+    componentDidMount(){
+        this.GetData();
     }
     
     render() {

@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import React, { Component } from 'react';
 
-class LoginView extends Component {
+class LoginView extends React.Component {
 
     async GetUserData(){
         let data = await axios.post('/get-user-data');

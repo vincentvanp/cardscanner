@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React, {Component}from 'react';
+import React from 'react';
 
 import LessonCard from './LessonCard';
 
 import { Space, Spin, Skeleton, Card, Pagination } from 'antd';
 
-class PreviousLessons extends Component {
+class PreviousLessons extends React.Component {
     state = {
         lessons: [],
         length: 0,
@@ -14,19 +14,16 @@ class PreviousLessons extends Component {
     }
 
     async GetData(){
-
         const {data} = await axios.post('/previous-lessons');
         this.setState({ lessons: data });
         this.setState({ length: data.lessons.length });
     }
 
     onChange = (value) => {
-
         this.setState({page: value})
     }
 
     componentDidMount(){
-        
         this.GetData();
     }
 

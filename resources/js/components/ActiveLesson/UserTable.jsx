@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { Table } from 'antd';
-import Pusher from "pusher-js";
+import Pusher from "pusher-js"
 import axios from 'axios';
 
 const { Column, ColumnGroup } = Table;
 
-class UserTable extends Component {
+class UserTable extends React.Component {
 
     state = {
-        
         studentData: [],
         lessonData: [],
         absentData: []
@@ -26,14 +25,12 @@ class UserTable extends Component {
     }
 
     async GetLessonData(){
-
         const data = await axios.post("/get-attending-students", {lesson_id: this.props.lesson});
 
         this.setState({lessonData: data.data});
     }
 
     async GetAbsentStudents(){
-
         const data = await axios.post('/get-absent-students', {lesson_id: sessionStorage.getItem('lesson_id')});
 
         this.setState({absentData: data.data});
@@ -47,6 +44,9 @@ class UserTable extends Component {
     }
 
     receiveUpdateFromPusher = data => {
+
+        // pusherData looks like this {"studentName": "Name", "studentId": 1234, "time": "12:30"}
+        const studentData = [data, ...this.state.studentData];
         
         this.GetLessonData();
         this.GetAbsentStudents();

@@ -1,5 +1,5 @@
 import { Form, Modal, Button, Select } from 'antd';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
 import { ClockCircleOutlined } from '@ant-design/icons';
 
@@ -8,7 +8,7 @@ const { Option } = Select;
 const axios = require('axios').default;
 
 
-class ContentForm extends Component{
+class ContentForm extends React.Component{
     state = {
         visible: false,
         courses: [],
@@ -30,6 +30,8 @@ class ContentForm extends Component{
 
     async GetlessonData(value){
         const lessons = await axios.post('/get-lesson-by-course', {course_id: value});
+
+        console.log(lessons.data);
 
         this.setState({ lessons: lessons.data });
     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout } from 'antd';
 
 import ContentForm from '../components/Dashboard/ContentForm';

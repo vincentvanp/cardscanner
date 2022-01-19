@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import { Table, Button } from 'antd';
 
-class PreviousDetail extends Component{
+class PreviousDetail extends React.Component{
     state = {
         present_students: [],
         absent_students: []
@@ -18,12 +18,10 @@ class PreviousDetail extends Component{
     }
 
     componentDidMount(){
-
         this.GetLessonData();
     }
 
     ReturnToDashboard(){
-        
         window.location.href = "/previous-lessons";
     }
 

@@ -6,6 +6,7 @@ import {
 import { Button, Layout, Menu } from 'antd';
 import { HomeFilled, LaptopOutlined, PlusSquareOutlined } from '@ant-design/icons';
 import axios from 'axios';
+import { valuesIn } from 'lodash';
 
 const { Sider } = Layout;
 
@@ -19,7 +20,7 @@ class Sidebar extends React.Component{
         let data = await axios.post('/get-user-data')
         .then(function(response){
             return response.data;
-        });
+        }).catch(e => console.log(e));
 
         if(data == undefined){
             window.location.href = "/login";

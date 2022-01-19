@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Sidebar from '../components/layoutComponents/Sidebar';
-import { Layout } from 'antd';
+import { Layout, PageHeader } from 'antd';
 
 import ScannerHeader from '../components/layoutComponents/header';
 
-const { Content } = Layout;
+const { Header, Footer, Sider, Content } = Layout;
 
 class LayoutView extends React.Component {
 

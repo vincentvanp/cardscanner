@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ButtonsActiveLesson extends Component {
+class ButtonsActiveLesson extends React.Component {
 
     render() {
         React.Fragment

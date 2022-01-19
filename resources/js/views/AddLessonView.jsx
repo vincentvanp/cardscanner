@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Spin, DatePicker, TimePicker , Input, Form, Select, Button} from 'antd';
+import {Checkbox, Spin, DatePicker, TimePicker , Input, Form, Select, Button} from 'antd';
 
 const { Option } = Select;
 const { RangePicker } = TimePicker;
@@ -14,6 +14,7 @@ class AddLessonView extends React.Component{
         endTime: "",
         date: "",
         name: "name",
+        checkedCourses: [],
     };
 
     layout = {
@@ -35,38 +36,49 @@ class AddLessonView extends React.Component{
         this.setState({name: values});
     }
 
-    componentDidMount(){
-        this.GetData();
-    }
-    
-    onFinish = (values) => {
-        
-        if(!values.name){
-            values.name = values.course;
-        }
-        
-        const {startTime, endTime, date} = this.state;
-        
-        axios.post('/create-lesson', {name: values.name, course: values.course, start: startTime, end: endTime, date: date});
-        
-        sessionStorage.setItem("selected", 1);
-        window.location.href = "/";
+    CheckChange = (e) => {
+
+        this.setState({checkedCourses: e})
     }
 
     async GetData(){
         const courses = await axios.post('/get-all-courses');
         this.setState({courses: courses.data})
     }
+
+    componentDidMount(){
+        this.GetData();
+    }
+
+    onFinish = (values) => {
+
+        if(!values.name){
+            values.name = values.course;
+        }
+
+        const {startTime, endTime, date} = this.state;
         
+        axios.post('/create-lesson', {name: values.name, course: values.course, start: startTime, end: endTime, date: date});
+
+        sessionStorage.setItem("selected", 1);
+        window.location.href = "/";
+    }
 
     render(){
 
-        const { name, courses} = this.state;
+        const {checkedCourses ,name, courses} = this.state;
 
         if(courses != ""){
             return(
                 <div>
-                    <h1 className='text--page-title form--header'>les aanmaken</h1>
+                    {/* <div className='form--checkbox-group'>
+                        <Checkbox.Group onChange={this.CheckChange}>
+                        {courses.map((course) => (
+                            <Checkbox value={course.name}>{course.name}</Checkbox>
+                            ))}
+                            </Checkbox.Group>
+                        </div> */}
+                    <h1 className='text--page-title form--header'>less aanmaken</h1>
                     <div className='container--add-lesson bg--dark'>
                         <Form className='form--add-lesson' {...this.layout} onFinish={this.onFinish}>
                             <Form.Item

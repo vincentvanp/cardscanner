@@ -37,7 +37,6 @@ class StudentController extends Controller
         return $students->toJson();
     }
 
-    //Function that sets present of given student to false needs lesson id and studentname/serial
     public function deleteStudentPresent(Request $request) 
     {
         

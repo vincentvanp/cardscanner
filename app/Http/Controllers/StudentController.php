@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Models\Lesson;
+use App\Events\populateUserTable;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use DB;
 
 class StudentController extends Controller
@@ -56,6 +58,10 @@ class StudentController extends Controller
         $lesson = Lesson::where('id', $request["lesson_id"])->first();
         
         $student->lessons()->updateExistingPivot($lesson,['present' => 0]);
+
+        $time = Carbon::parse($student->lessons()->first()->pivot->updated_at)->format('H:i');
+
+        event(new populateUserTable($student->name, $request["serial"], $time));
 
         return ['status' => 'OK'];
     }

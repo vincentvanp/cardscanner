@@ -38,11 +38,29 @@ class ActiveLessonView extends React.Component {
 
         });
 
+        
         const Scanned = () =>{
             this.GetStudents();
         }
     }
 
+    pusherBind(channel, event) {
+
+        this.pusher = new Pusher(process.env.MIX_PUSHER_APP_KEY, {
+            cluster: 'eu'
+        });
+
+        this.channel = this.pusher.subscribe(channel);
+
+        this.channel.bind(event, this.receiveUpdateFromPusher)
+    }
+
+    receiveUpdateFromPusher = data => {
+
+        console.log(data);
+        this.GetStudents();
+    }
+    
     formRef = React.createRef();
 
     showAddModal = () => {
@@ -87,6 +105,8 @@ class ActiveLessonView extends React.Component {
     async GetUserData(){
         let data = await axios.post('/get-user-data');
         
+        this.pusherBind("backToFront", data.data.id);
+
         this.setState({ lesson: {
                             channel: 'backToFront',
                             event: data.data.id,
@@ -99,6 +119,8 @@ class ActiveLessonView extends React.Component {
     async GetStudents(){
         let data = await axios.post('/get-absent-students', {lesson_id: sessionStorage.getItem('lesson_id')});
         
+        console.log(data.data);
+
         this.setState({ students: data.data});
     }
 

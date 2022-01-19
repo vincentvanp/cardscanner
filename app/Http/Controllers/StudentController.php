@@ -54,8 +54,9 @@ class StudentController extends Controller
         }
 
         $lesson = Lesson::where('id', $request["lesson_id"])->first();
+        
+        $student->lessons()->updateExistingPivot($lesson,['present' => 0]);
 
-        return $student->lessons()->updateExistingPivot($lesson,['present' => 0]);
-
+        return ['status' => 'OK'];
     }
 }

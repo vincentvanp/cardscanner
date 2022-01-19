@@ -57,7 +57,8 @@ class StatisticsController extends Controller
 
         }
 
-        if($totalStudents == 0){
+        if($totalStudents == 0)
+        {
             return 0;
         }
 

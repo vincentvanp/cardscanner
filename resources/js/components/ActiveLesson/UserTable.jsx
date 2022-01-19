@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table } from 'antd';
 import Pusher from "pusher-js"
-import { data } from 'autoprefixer';
+import axios from 'axios';
 
 const { Column, ColumnGroup } = Table;
 
@@ -81,9 +81,30 @@ class UserTable extends React.Component {
     ]
 
     Delete = (props) =>{
+
         return(
             <a onClick={() => {
-                console.log(props.student);
+                const {absentData, lessonData} = this.state;
+
+                axios.post("/remove-student", { lesson_id: sessionStorage.getItem('lesson_id'), name: props.student.name });
+
+                var student = props.student
+
+                student.action = "";
+
+                absentData.push(props.student);
+                
+                for(let i = 0; i < lessonData.length; i++){
+                    if(lessonData[i].name == props.student.name){
+
+                        console.log(lessonData[i].name);
+                        console.log(props.student.name);
+                        lessonData.splice(i, 1);
+                    }
+                }
+
+                this.setState({ absentData: absentData, lessonData: lessonData});
+
             }} style={{color: "red"}}>verwijderen</a>
         );
     }

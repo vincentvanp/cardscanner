@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('add-student-by-name', [ScannerController::class, 'storeStudentByName']);
     Route::post('previous-courses', [LessonController::class, 'getDataLoggedInUser']);
     Route::post('create-lesson', [LessonController::class, 'createLesson']);
+    Route::post('remove-student', [StudentController::class, 'deleteStudentPresent']);
 
 
     Route::post('get-course-attendence', [StatisticsController::class, 'courseAttendence']);
